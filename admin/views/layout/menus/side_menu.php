@@ -16,6 +16,7 @@ echo Menu::item([
     "route" => "#",
     "links" => [
         ["route"=>"doctor/index","text"=>"Doctors","icon"=>"fa fa-stethoscope nav-icon"],
+        ["route"=>"consultation/index","text"=>"Consultation","icon"=>"fa fa-calendar nav-icon"],
         ["route"=>"schedule/index","text"=>"Doctors Schedule","icon"=>"fa fa-calendar nav-icon"],
     ]
 ]);
