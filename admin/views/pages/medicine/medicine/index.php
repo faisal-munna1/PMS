@@ -21,7 +21,7 @@
 </div>
 
 <div class="mb-3 text-end">
-    <a href="<?= $base_url ?>/medicines/create" class="btn btn-primary">
+    <a href="<?= $base_url ?>/medicine/create" class="btn btn-primary">
         Add Medicine
     </a>
 </div>
@@ -102,12 +102,12 @@
 
                     <div class="btn-group btn-group-sm">
 
-                        <a href="<?= $base_url ?>/medicines/edit/<?= $value->id ?>"
+                        <a href="<?= $base_url ?>/medicine/edit/<?= $value->id ?>"
                            class="btn btn-primary">
                             Edit
                         </a>
 
-                        <a href="<?= $base_url ?>/medicines/delete/<?= $value->id ?>"
+                        <a href="<?= $base_url ?>/medicine/delete/<?= $value->id ?>"
                            class="btn btn-danger"
                            onclick="return confirm('Are you sure to delete this record?')">
                             Delete

@@ -1,6 +1,6 @@
 <?php
 
-class MedicinesController
+class MedicineController
 {
     public function index()
     {

@@ -3,7 +3,7 @@
    
      define("SERVER","localhost");
      define("USER","root");
-     define("DATABASE","patient_management");
+     define("DATABASE","pms");
      define("PASSWORD","");
 
    //Local
