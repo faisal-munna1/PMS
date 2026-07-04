@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2026 at 10:12 AM
+-- Generation Time: Jul 04, 2026 at 06:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -497,28 +497,16 @@ CREATE TABLE `prescriptions` (
   `patient_id` int(11) NOT NULL,
   `doctor_id` int(11) NOT NULL,
   `prescription_date` date NOT NULL,
-  `additional_notes` text DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `prescription_items`
+-- Dumping data for table `prescriptions`
 --
 
-CREATE TABLE `prescription_items` (
-  `id` int(11) NOT NULL,
-  `prescription_id` int(11) NOT NULL,
-  `medicine_id` int(11) NOT NULL,
-  `dosage` varchar(100) NOT NULL,
-  `frequency` varchar(100) NOT NULL,
-  `duration` varchar(50) NOT NULL,
-  `instructions` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `prescriptions` (`id`, `consultation_id`, `patient_id`, `doctor_id`, `prescription_date`, `created_at`, `updated_at`) VALUES
+(1, 1, 4, 1, '2026-07-04', '2026-07-04 14:32:48', '2026-07-04 14:32:48');
 
 -- --------------------------------------------------------
 
@@ -530,12 +518,14 @@ CREATE TABLE `prescription_medicines` (
   `id` int(11) NOT NULL,
   `prescription_id` int(11) NOT NULL,
   `medicine_id` int(11) NOT NULL,
-  `dose_id` int(11) DEFAULT NULL,
-  `frequency_id` int(11) DEFAULT NULL,
-  `duration_id` int(11) DEFAULT NULL,
+  `dose_id` int(11) NOT NULL,
+  `frequency_id` int(11) NOT NULL,
+  `duration_id` int(11) NOT NULL,
   `instruction_id` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT 1,
-  `sort_order` int(11) DEFAULT 1
+  `remarks` varchar(255) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -764,12 +754,6 @@ ALTER TABLE `prescriptions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `prescription_items`
---
-ALTER TABLE `prescription_items`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `prescription_medicines`
 --
 ALTER TABLE `prescription_medicines`
@@ -935,13 +919,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `prescriptions`
 --
 ALTER TABLE `prescriptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `prescription_items`
---
-ALTER TABLE `prescription_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `prescription_medicines`
