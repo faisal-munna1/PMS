@@ -6,7 +6,7 @@ echo Menu::item([
     "route" => "#",
     "links" => [
         ["route"=>"user/index","text"=>"Manage User","icon"=>"fa fa-user nav-icon"],
-        ["route"=>"role/index","text"=>"Manage Role","icon"=>"fa fa-key nav-icon"],
+        ["route"=>"role/index","text"=>"Manage Role","icon"=>"fa fa-lock nav-icon"],
     ]
 ]);
 
@@ -15,8 +15,8 @@ echo Menu::item([
     "icon"  => "nav-icon fa fa-user-md",
     "route" => "#",
     "links" => [
-        ["route"=>"doctor/index","text"=>"Doctors","icon"=>"fa fa-stethoscope nav-icon"],
-        ["route"=>"consultation/index","text"=>"Consultation","icon"=>"fa fa-calendar nav-icon"],
+        ["route"=>"doctor/index","text"=>"Doctors","icon"=>"fa fa-user-md nav-icon"],
+        ["route"=>"consultation/index","text"=>"Consultation","icon"=>"fa fa-stethoscope nav-icon"],
         ["route"=>"schedule/index","text"=>"Doctors Schedule","icon"=>"fa fa-calendar nav-icon"],
     ]
 ]);
@@ -26,8 +26,8 @@ echo Menu::item([
     "icon"  => "nav-icon fa fa-wheelchair",
     "route" => "#",
     "links" => [
-        ["route"=>"patient/index","text"=>"All Patient","icon"=>"fa fa-users nav-icon"],
-        ["route"=>"appointment/index","text"=>"Appointments","icon"=>"fa fa-list-alt nav-icon"],
+        ["route"=>"patient/index","text"=>"All Patient","icon"=>"fa fa-wheelchair nav-icon"],
+        ["route"=>"appointment/index","text"=>"Appointments","icon"=>"fa fa-calendar-check-o nav-icon"],
     ]
 ]);
 
@@ -44,7 +44,17 @@ echo Menu::item([
         ["route"=>"dose/index","text"=>"Medicine Dose","icon"=>"fa fa-eyedropper nav-icon"],
         ["route"=>"frequency/index","text"=>"Medicine Frequency","icon"=>"fa fa-repeat nav-icon"],
         ["route"=>"duration/index","text"=>"Medicine Duration","icon"=>"fa fa-clock-o nav-icon"],
-        ["route"=>"instruction/index","text"=>"Medicine Instruction","icon"=>"fa fa-list-alt nav-icon"],
+        ["route"=>"instruction/index","text"=>"Medicine Instruction","icon"=>"fa fa-list-ul nav-icon"],
+    ]
+]);
+
+echo Menu::item([
+    "name"  => "Prescription",
+    "icon"  => "nav-icon fa fa-file-text-o",
+    "route" => "#",
+    "links" => [
+        ["route"=>"prescription/index","text"=>"Prescription","icon"=>"fa fa-file-text-o nav-icon"],
+        ["route"=>"prescriptionMedicine/index","text"=>"Prescription Medicine","icon"=>"fa fa-medkit nav-icon"],
     ]
 ]);
 
