@@ -21,7 +21,6 @@ class TypeController
         }
 
         $type = $this->typeData();
-
         $type->create();
 
         redirect();
@@ -29,7 +28,13 @@ class TypeController
 
     public function edit()
     {
-        $data = Type::find($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            redirect();
+            return;
+        }
+
+        $data = Type::find($id);
 
         view("medicine", compact("data"));
     }
@@ -41,16 +46,22 @@ class TypeController
         }
 
         $type = $this->typeData();
-        $type->id = $_POST["id"];
+        $type->id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
-        $type->update();
+        if ($type->id) {
+            $type->update();
+        }
 
         redirect();
     }
 
     public function delete()
     {
-        Type::delete($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if ($id) {
+            Type::delete($id);
+        }
 
         redirect();
     }
@@ -59,10 +70,9 @@ class TypeController
     {
         $type = new Type();
 
-        $type->type_name = $_POST["type_name"];
-        $type->status = $_POST["status"];
+        $type->type_name = filter_input(INPUT_POST, 'type_name', FILTER_DEFAULT);
+        $type->status    = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
 
         return $type;
     }
 }
-?>

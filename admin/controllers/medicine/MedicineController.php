@@ -11,17 +11,12 @@ class MedicineController
 
     public function create()
     {
-        $generics = Generic::all();
+        $generics      = Generic::all();
         $manufacturers = Manufacturer::all();
-        $types = Type::all();
-        $strengths = Strength::all();
+        $types         = Type::all();
+        $strengths     = Strength::all();
 
-        view("medicine", compact(
-            "generics",
-            "manufacturers",
-            "types",
-            "strengths"
-        ));
+        view("medicine", compact("generics", "manufacturers", "types", "strengths"));
     }
 
     public function save()
@@ -31,7 +26,6 @@ class MedicineController
         }
 
         $medicine = $this->medicineData();
-
         $medicine->create();
 
         redirect();
@@ -39,20 +33,19 @@ class MedicineController
 
     public function edit()
     {
-        $data = Medicine::find($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            redirect();
+            return;
+        }
 
-        $generics = Generic::all();
+        $data          = Medicine::find($id);
+        $generics      = Generic::all();
         $manufacturers = Manufacturer::all();
-        $types = Type::all();
-        $strengths = Strength::all();
+        $types         = Type::all();
+        $strengths     = Strength::all();
 
-        view("medicine", compact(
-            "data",
-            "generics",
-            "manufacturers",
-            "types",
-            "strengths"
-        ));
+        view("medicine", compact("data", "generics", "manufacturers", "types", "strengths"));
     }
 
     public function update()
@@ -61,17 +54,23 @@ class MedicineController
             return;
         }
 
-        $medicine = $this->medicineData();
-        $medicine->id = $_POST["id"];
+        $medicine     = $this->medicineData();
+        $medicine->id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
-        $medicine->update();
+        if ($medicine->id) {
+            $medicine->update();
+        }
 
         redirect();
     }
 
     public function delete()
     {
-        Medicine::delete($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if ($id) {
+            Medicine::delete($id);
+        }
 
         redirect();
     }
@@ -80,12 +79,12 @@ class MedicineController
     {
         $medicine = new Medicine();
 
-        $medicine->medicine_name   = $_POST["medicine_name"];
-        $medicine->generic_id      = $_POST["generic_id"];
-        $medicine->manufacturer_id = $_POST["manufacturer_id"];
-        $medicine->type_id         = $_POST["type_id"];
-        $medicine->strength_id     = $_POST["strength_id"];
-        $medicine->status          = $_POST["status"];
+        $medicine->medicine_name   = filter_input(INPUT_POST, 'medicine_name', FILTER_DEFAULT);
+        $medicine->generic_id      = filter_input(INPUT_POST, 'generic_id', FILTER_VALIDATE_INT);
+        $medicine->manufacturer_id = filter_input(INPUT_POST, 'manufacturer_id', FILTER_VALIDATE_INT);
+        $medicine->type_id         = filter_input(INPUT_POST, 'type_id', FILTER_VALIDATE_INT);
+        $medicine->strength_id     = filter_input(INPUT_POST, 'strength_id', FILTER_VALIDATE_INT);
+        $medicine->status          = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
 
         return $medicine;
     }

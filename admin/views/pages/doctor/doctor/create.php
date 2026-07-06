@@ -46,10 +46,10 @@
 
                     <!-- Full Name -->
                     <div class="col-md-12 mb-3">
-                        <label class="form-label">Full Name</label>
+                        <label class="form-label">Name</label>
                         <input type="text"
                             class="form-control"
-                            name="full_name"
+                            name="name"
                             placeholder="Enter full_name">
                     </div>
                     <!-- email -->

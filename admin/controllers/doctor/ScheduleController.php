@@ -22,17 +22,15 @@ class ScheduleController
             return;
         }
 
-        if (empty($_POST["day_of_week"])) {
+        $days = $_POST["day_of_week"] ?? [];
+        if (empty($days) || !is_array($days)) {
             redirect();
             return;
         }
 
-        foreach ($_POST["day_of_week"] as $day) {
-
+        foreach ($days as $day) {
             $schedule = $this->scheduleData();
-
-            $schedule->day_of_week = $day;
-
+            $schedule->day_of_week = filter_var($day, FILTER_DEFAULT);
             $schedule->create();
         }
 
@@ -41,7 +39,13 @@ class ScheduleController
 
     public function edit()
     {
-        $data = Schedule::find($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            redirect();
+            return;
+        }
+
+        $data = Schedule::find($id);
         $doctors = Schedule::doctors();
 
         view("doctor", compact("data", "doctors"));
@@ -54,18 +58,23 @@ class ScheduleController
         }
 
         $schedule = $this->scheduleData();
+        $schedule->id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+        $schedule->day_of_week = filter_input(INPUT_POST, 'day_of_week', FILTER_DEFAULT);
 
-        $schedule->id = $_POST["id"];
-        $schedule->day_of_week = $_POST["day_of_week"];
-
-        $schedule->update();
+        if ($schedule->id) {
+            $schedule->update();
+        }
 
         redirect();
     }
 
     public function delete()
     {
-        Schedule::delete($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if ($id) {
+            Schedule::delete($id);
+        }
 
         redirect();
     }
@@ -74,10 +83,10 @@ class ScheduleController
     {
         $schedule = new Schedule();
 
-        $schedule->doctor_id  = $_POST["doctor_id"];
-        $schedule->start_time = $_POST["start_time"];
-        $schedule->end_time   = $_POST["end_time"];
-        $schedule->is_active  = $_POST["is_active"];
+        $schedule->doctor_id  = filter_input(INPUT_POST, 'doctor_id', FILTER_VALIDATE_INT);
+        $schedule->start_time = filter_input(INPUT_POST, 'start_time', FILTER_DEFAULT);
+        $schedule->end_time   = filter_input(INPUT_POST, 'end_time', FILTER_DEFAULT);
+        $schedule->is_active  = filter_input(INPUT_POST, 'is_active', FILTER_VALIDATE_INT);
 
         return $schedule;
     }

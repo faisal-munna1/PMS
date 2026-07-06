@@ -1,24 +1,19 @@
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="<?php echo $base_url ?>/asset/dist/img/AdminLTELogo.png" alt=" Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">PMS</span>
+<aside class="main-sidebar  sidebar-dark-secondary elevation-4">
+    <a href="<?php echo $base_url ?>/home" class="brand-link mt-2 d-flex align-items-center justify-content-center" style="height: 56px;">
+       <img src="<?php echo $base_url ?>/asset/dist/img/faisal_logo.png" alt="FAISALWEBAPP" class="img-fluid">
     </a>
 
-    <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?php echo $base_url ?>/asset/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="<?php echo $base_url ?>/uploads/users/<?php echo isset($_SESSION['uimage']) ? $_SESSION['uimage'] : 'default.png'; ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo isset($_SESSION["uname"]) ? $_SESSION["uname"] : "", isset($_SESSION["urole"]) ? ", " . $_SESSION["urole"] : "" ?></a>
+          <a href="#" class="d-block"><?php echo isset($_SESSION["user_name"]) ? $_SESSION["user_name"] : ""  ?> <br>
+         <?php echo isset($_SESSION["urole"]) ? "Type: " . $_SESSION["urole"] : "" ?></a>
         </div>
       </div>
 
-      <!-- SidebarSearch Form -->
       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -30,7 +25,6 @@
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <?php
@@ -38,7 +32,5 @@
           ?>
         </ul>
       </nav>
-      <!-- sidebar-menu -->
     </div>
-    <!-- sidebar -->
   </aside>

@@ -1,183 +1,179 @@
-<?php session_start();  
-  require_once("configs/db_config.php");
-  $base_url="cpanel";
-  //require_once("library/classes/system_log.class.php");
-  
-  if(isset($_POST["btnSignIn"])){
-    
-     $username=trim($_POST["txtUsername"]);
-     $password=trim($_POST["txtPassword"]);
-     //echo $username," ",$password;
-    //  $result=$db->query("select u.id,u.username,r.name from {$tx}users u,{$tx}role r where r.id=u.role_id and u.username='$username' and u.password='$password'");
-     $result=$db->query("select u.id,u.username,u.password,u.email,u.phone,u.role_id,r.name role from {$tx}users u,{$tx}role r where r.id=u.role_id and u.username='$username' and u.status='active'");
-    
-  
-      $user=$result->fetch_object();
-      // print_r($user);
+<?php
+session_start();
 
+require_once("configs/db_config.php");
+$base_url = "cpanel";
 
-      if($user && password_verify($password,$user->password)){
-        
-        $_SESSION["uid"]=$user->id;
-        $_SESSION["uname"]=$user->username;
-        // $_SESSION["uphoto"]=$user->photo;
-        $_SESSION["email"]=$user->email;
-        $_SESSION["phone"]=$user->phone; 
-        $_SESSION["role_id"]=$user->role_id;
-        $_SESSION["urole"]=$user->role;
+$error_message = "";
 
-        header("location:home");
-      }else{
-        echo "Incorrect username or password";
-      }
-        
-        
-        
-         //  $now=date("Y-m-d H:i:s");
-        //  $log=new System_log("","LOGIN","Successfully logged in user : $uid-$_username",$now);
-        //  $log->save();
+if (isset($_POST["btnSignIn"])) {
 
-               
-  
-    }
+  $login_input = trim($_POST["txtUsername"]);
+  $password = trim($_POST["txtPassword"]);
 
+  $stmt = $db->prepare("
+        SELECT u.id, u.username,u.name as user_name, u.image, u.password, u.email, u.phone, u.role_id, r.name AS role 
+        FROM {$tx}users u 
+        JOIN {$tx}role r ON r.id = u.role_id 
+        WHERE (u.username = ? OR u.email = ?) AND u.status = 'active'
+    ");
+
+  $stmt->bind_param("ss", $login_input, $login_input);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $user = $result->fetch_object();
+
+  if ($user && password_verify($password, $user->password)) {
+
+    $_SESSION["uid"] = $user->id;
+    $_SESSION["uname"] = $user->username;
+    $_SESSION["uimage"] = $user->image;
+    $_SESSION["user_name"] = $user->user_name;
+    $_SESSION["email"] = $user->email;
+    $_SESSION["phone"] = $user->phone;
+    $_SESSION["role_id"] = $user->role_id;
+    $_SESSION["urole"] = $user->role;
+
+    header("location:home");
+    exit;
+  } else {
+    $error_message = "Incorrect username/email or password";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pataint Management</title>
+  <title>Hospital Management System | Login</title>
 
-  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="asset/plugins/fontawesome-free/css/all.min.css">
-  <!-- icheck bootstrap -->
   <link rel="stylesheet" href="asset/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="asset//dist/css/adminlte.min.css">
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <a href="#" class="h1"><b>SECURE</b> SOLUTION 
-        	<?php
-            // echo password_hash("12345", PASSWORD_DEFAULT);
-          ?>
-      </a>
-      <div style="text-align:center;color:orange;font-weight:bold"> <?php echo isset($error)?$error:"";?></div>
-    </div>
-    <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>       
-      <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" name="txtUsername" id="txtUsername" placeholder="User name">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" name="txtPassword" id="txtPassword" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="chkRemember">
-              <label for="chkRemember">
-                Remember Me
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" name="btnSignIn" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
+  <link rel="stylesheet" href="asset/dist/css/adminlte.min.css">
 
-      <div class="social-auth-links text-center mt-2 mb-3">
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div>
-      <!-- /.social-auth-links -->
-
-      <!-- <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p> -->
-    </div>
-    <!-- /.card-body -->
-  </div>
-  <!-- /.card -->
-</div>
-<!-- /.login-box -->
-
-<!-- jQuery -->
-<script src="asset/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="asset/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- App -->
-<script src="asset/dist/js/adminlte.min.js"></script>
-<script>
-$(function () {
-
-rememberStatus();
-
-$('#txtUsername').on("input",function(){
-  remember();
-});
-
-$('#txtPassword').on("input",function(){
-  remember();
-});
-
-$('#chkRemember').click(function () {
-  remember();
-});
-
-function remember(){
-  if ($('#chkRemember').is(':checked')) {
-        // save username and password
-        localStorage.username = $('#txtUsername').val().trim();
-        localStorage.pass = $('#txtPassword').val().trim();
-        localStorage.chkbox = $('#chkRemember').val();
-    } else {
-        localStorage.username = '';
-        localStorage.pass = '';
-        localStorage.chkbox = '';
+  <style>
+    body.login-page {
+      background: linear-gradient(135deg, #eef5f9 0%, #d2e4ee 100%) !important;
     }
-}
 
-function rememberStatus(){
-    if (localStorage.chkbox && localStorage.chkbox != '') {
-      $('#chkRemember').attr('checked', 'checked');
-      $('#txtUsername').val(localStorage.username);
-      $('#txtPassword').val(localStorage.pass);
-    }else {
-      $('#chkRemember').removeAttr('checked');
-      $('#txtUsername').val('');
-      $('#txtPassword').val('');
-   }
-}
+    .login-box .card {
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05) !important;
+      border-top: 4px solid #007bff !important;
+    }
 
-});
+    .medical-icon-header {
+      font-size: 3rem;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body class="hold-transition login-page">
+  <div class="login-box">
+    <div class="card">
+      <div class="card-header text-center pt-4">
+        <div class="medical-icon-header">
+        </div>
+        <a href="#" class="h2">
+          <img src="asset/dist/img/faisal_logo.png" alt="" class="img-aluid" width="300"></a>
+        <p class="text-muted small mt-1">Patient Management System</p>
+
+        <div style="text-align:center;color:red;font-weight:bold;font-size:0.9rem;" class="mt-2">
+          <?php echo isset($error_message) ? htmlspecialchars($error_message) : ""; ?>
+        </div>
+      </div>
+
+      <div class="card-body login-card-body px-4 pb-4">
+        <p class="login-box-msg text-secondary"></p>
+
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" name="txtUsername" id="txtUsername" placeholder="Username / Email" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user-md"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" name="txtPassword" id="txtPassword" placeholder="Password" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row pt-2">
+            <div class="col-12">
+              <button type="submit" name="btnSignIn" class="btn btn-primary btn-block shadow-sm">
+                <i class="fas fa-sign-in-alt mr-1"></i> Login
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div class="text-center mt-4 pt-3 border-top">
+          <p class="text-muted small mb-0">
+            <i class="fas fa-info-circle mr-1"></i> Having trouble? Contact System Admin.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="asset/plugins/jquery/jquery.min.js"></script>
+  <script src="asset/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="asset/dist/js/adminlte.min.js"></script>
+  <script>
+    $(function() {
+      rememberStatus();
+
+      $('#txtUsername').on("input", function() {
+        remember();
+      });
+
+      $('#txtPassword').on("input", function() {
+        remember();
+      });
+
+      $('#chkRemember').click(function() {
+        remember();
+      });
+
+      function remember() {
+        if ($('#chkRemember').is(':checked')) {
+          localStorage.username = $('#txtUsername').val().trim();
+          localStorage.pass = $('#txtPassword').val().trim();
+          localStorage.chkbox = $('#chkRemember').val();
+        } else {
+          localStorage.username = '';
+          localStorage.pass = '';
+          localStorage.chkbox = '';
+        }
+      }
+
+      function rememberStatus() {
+        if (localStorage.chkbox && localStorage.chkbox != '') {
+          $('#chkRemember').attr('checked', 'checked');
+          $('#txtUsername').val(localStorage.username);
+          $('#txtPassword').val(localStorage.pass);
+        } else {
+          $('#chkRemember').removeAttr('checked');
+          $('#txtUsername').val('');
+          $('#txtPassword').val('');
+        }
+      }
+    });
   </script>
 </body>
+
 </html>

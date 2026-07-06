@@ -14,48 +14,53 @@ class Medicine
     {
         global $db;
 
-        return $db->query("
-            INSERT INTO medicines(
-                medicine_name,
-                generic_id,
-                manufacturer_id,
-                type_id,
-                strength_id,
-                status
-            )
-            VALUES(
-                '$this->medicine_name',
-                '$this->generic_id',
-                '$this->manufacturer_id',
-                '$this->type_id',
-                '$this->strength_id',
-                '$this->status'
-            )
+        $stmt = $db->prepare("
+            INSERT INTO medicines (medicine_name, generic_id, manufacturer_id, type_id, strength_id, status)
+            VALUES (?, ?, ?, ?, ?, ?)
         ");
+
+        $stmt->bind_param(
+            "siiiis",
+            $this->medicine_name,
+            $this->generic_id,
+            $this->manufacturer_id,
+            $this->type_id,
+            $this->strength_id,
+            $this->status
+        );
+
+        return $stmt->execute();
     }
 
     public function update()
     {
         global $db;
 
-        return $db->query("
+        $stmt = $db->prepare("
             UPDATE medicines
-            SET
-                medicine_name='$this->medicine_name',
-                generic_id='$this->generic_id',
-                manufacturer_id='$this->manufacturer_id',
-                type_id='$this->type_id',
-                strength_id='$this->strength_id',
-                status='$this->status'
-            WHERE id='$this->id'
+            SET medicine_name = ?, generic_id = ?, manufacturer_id = ?, type_id = ?, strength_id = ?, status = ?
+            WHERE id = ?
         ");
+
+        $stmt->bind_param(
+            "siiiiis",
+            $this->medicine_name,
+            $this->generic_id,
+            $this->manufacturer_id,
+            $this->type_id,
+            $this->strength_id,
+            $this->status,
+            $this->id
+        );
+
+        return $stmt->execute();
     }
 
     public static function all()
     {
         global $db;
 
-        $stmt = $db->query("
+        $stmt = $db->prepare("
             SELECT
                 m.*,
                 g.generic_name,
@@ -63,20 +68,19 @@ class Medicine
                 t.type_name,
                 s.strength_name
             FROM medicines m
-            LEFT JOIN medicine_generics g
-                ON m.generic_id = g.id
-            LEFT JOIN medicine_manufacturers mf
-                ON m.manufacturer_id = mf.id
-            LEFT JOIN medicine_types t
-                ON m.type_id = t.id
-            LEFT JOIN medicine_strengths s
-                ON m.strength_id = s.id
+            LEFT JOIN medicine_generics g ON m.generic_id = g.id
+            LEFT JOIN medicine_manufacturers mf ON m.manufacturer_id = mf.id
+            LEFT JOIN medicine_types t ON m.type_id = t.id
+            LEFT JOIN medicine_strengths s ON m.strength_id = s.id
             ORDER BY m.id DESC
         ");
 
+        $stmt->execute();
+        $result = $stmt->get_result();
+
         return array_map(
             fn($row) => (object)$row,
-            $stmt->fetch_all(MYSQLI_ASSOC)
+            $result->fetch_all(MYSQLI_ASSOC)
         );
     }
 
@@ -84,22 +88,29 @@ class Medicine
     {
         global $db;
 
-        $stmt = $db->query("
+        $stmt = $db->prepare("
             SELECT *
             FROM medicines
-            WHERE id='$id'
+            WHERE id = ?
         ");
 
-        return $stmt->fetch_object();
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_object();
     }
 
     public static function delete($id)
     {
         global $db;
 
-        return $db->query("
+        $stmt = $db->prepare("
             DELETE FROM medicines
-            WHERE id='$id'
+            WHERE id = ?
         ");
+
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
     }
 }

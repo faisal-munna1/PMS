@@ -21,7 +21,6 @@ class StrengthController
         }
 
         $strength = $this->strengthData();
-
         $strength->create();
 
         redirect();
@@ -29,7 +28,13 @@ class StrengthController
 
     public function edit()
     {
-        $data = Strength::find($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            redirect();
+            return;
+        }
+
+        $data = Strength::find($id);
 
         view("medicine", compact("data"));
     }
@@ -41,16 +46,22 @@ class StrengthController
         }
 
         $strength = $this->strengthData();
-        $strength->id = $_POST["id"];
+        $strength->id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
-        $strength->update();
+        if ($strength->id) {
+            $strength->update();
+        }
 
         redirect();
     }
 
     public function delete()
     {
-        Strength::delete($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if ($id) {
+            Strength::delete($id);
+        }
 
         redirect();
     }
@@ -59,10 +70,9 @@ class StrengthController
     {
         $strength = new Strength();
 
-        $strength->strength_name = $_POST["strength_name"];
-        $strength->status = $_POST["status"];
+        $strength->strength_name = filter_input(INPUT_POST, 'strength_name', FILTER_DEFAULT);
+        $strength->status        = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
 
         return $strength;
     }
 }
-?>

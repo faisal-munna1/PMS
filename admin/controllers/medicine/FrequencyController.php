@@ -21,7 +21,6 @@ class FrequencyController
         }
 
         $frequency = $this->frequencyData();
-
         $frequency->create();
 
         redirect();
@@ -29,7 +28,13 @@ class FrequencyController
 
     public function edit()
     {
-        $data = Frequency::find($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            redirect();
+            return;
+        }
+
+        $data = Frequency::find($id);
 
         view("medicine", compact("data"));
     }
@@ -41,16 +46,22 @@ class FrequencyController
         }
 
         $frequency = $this->frequencyData();
-        $frequency->id = $_POST["id"];
+        $frequency->id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
-        $frequency->update();
+        if ($frequency->id) {
+            $frequency->update();
+        }
 
         redirect();
     }
 
     public function delete()
     {
-        Frequency::delete($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if ($id) {
+            Frequency::delete($id);
+        }
 
         redirect();
     }
@@ -59,7 +70,7 @@ class FrequencyController
     {
         $frequency = new Frequency();
 
-        $frequency->frequency_name = $_POST["frequency_name"];
+        $frequency->frequency_name = filter_input(INPUT_POST, 'frequency_name', FILTER_DEFAULT);
 
         return $frequency;
     }

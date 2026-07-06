@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <form method="post" action="<?= $base_url ?>/duration/update">
+        <form method="post" action="<?= $base_url ?>/duration/save">
 
             <div class="card-body">
 
@@ -26,7 +26,6 @@
                         class="form-control"
                         id="duration_name"
                         name="duration_name"
-                        value="<?= htmlspecialchars($data->duration_name ?? '') ?>"
                         placeholder="Enter Duration Name"
                         required>
                 </div>
@@ -35,7 +34,7 @@
 
             <div class="card-footer">
                 <button type="submit" name="btn_submit" class="btn btn-primary">
-                    Update Duration
+                    Save Duration
                 </button>
 
                 <a href="<?= $base_url ?>/duration/index" class="btn btn-secondary">

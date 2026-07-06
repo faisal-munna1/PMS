@@ -21,7 +21,6 @@ class DoseController
         }
 
         $dose = $this->doseData();
-
         $dose->create();
 
         redirect();
@@ -29,7 +28,13 @@ class DoseController
 
     public function edit()
     {
-        $data = Dose::find($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            redirect();
+            return;
+        }
+
+        $data = Dose::find($id);
 
         view("medicine", compact("data"));
     }
@@ -41,16 +46,22 @@ class DoseController
         }
 
         $dose = $this->doseData();
-        $dose->id = $_POST["id"];
+        $dose->id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
-        $dose->update();
+        if ($dose->id) {
+            $dose->update();
+        }
 
         redirect();
     }
 
     public function delete()
     {
-        Dose::delete($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if ($id) {
+            Dose::delete($id);
+        }
 
         redirect();
     }
@@ -59,7 +70,7 @@ class DoseController
     {
         $dose = new Dose();
 
-        $dose->dose_name = $_POST["dose_name"];
+        $dose->dose_name = filter_input(INPUT_POST, 'dose_name', FILTER_DEFAULT);
 
         return $dose;
     }

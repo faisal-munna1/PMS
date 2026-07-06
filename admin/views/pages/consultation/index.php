@@ -24,7 +24,7 @@
         data-search="true"
         data-pagination="true">
 
-        <thead class="table-dark">
+        <thead class="table-dark text-center">
 
             <tr>
 
@@ -43,11 +43,11 @@
 
         <tbody>
 
-            <?php foreach($data as $key=>$consultation){ ?>
+            <?php foreach ($data as $key => $consultation) { ?>
 
                 <tr>
 
-                    <td><?= $key+1 ?></td>
+                    <td><?= $key + 1 ?></td>
 
                     <td><?= $consultation->consultation_date ?></td>
 
@@ -55,13 +55,13 @@
 
                     <td><?= $consultation->doctor_name ?></td>
 
-                    <td><?= substr($consultation->chief_complaint,0,40) ?></td>
+                    <td><?= substr($consultation->chief_complaint, 0, 40) ?></td>
 
-                    <td><?= substr($consultation->diagnosis,0,40) ?></td>
+                    <td><?= substr($consultation->diagnosis, 0, 40) ?></td>
 
                     <td class="text-center">
 
-                        <?php if(!empty($consultation->report)){ ?>
+                        <?php if (!empty($consultation->report)) { ?>
 
                             <a href="<?= $base_url ?>/uploads/reports/<?= $consultation->report ?>"
                                 target="_blank"
@@ -71,7 +71,7 @@
 
                             </a>
 
-                        <?php }else{ ?>
+                        <?php } else { ?>
 
                             <span class="badge bg-secondary">
                                 No File
@@ -81,7 +81,7 @@
 
                     </td>
 
-                    <td>
+                    <td class="text-center">
 
                         <div class="btn-group btn-group-sm">
 
@@ -92,13 +92,13 @@
 
                             </a>
 
-                            <a href="<?= $base_url ?>/consultation/delete/<?= $consultation->id ?>"
+                            <!-- <a href="<?= $base_url ?>/consultation/delete/<?= $consultation->id ?>"
                                 class="btn btn-danger"
                                 onclick="return confirm('Are you sure?')">
 
                                 Delete
 
-                            </a>
+                            </a> -->
 
                         </div>
 

@@ -39,8 +39,8 @@
                 <th>S/L</th>
                 <th>Image</th>
                 <th>Doctor Name</th>
-                <th>Specialization</th>
-                <th>Qualification</th>
+                <th>Email</th>
+                <th>Phone</th>
                 <th>Consultation Fee</th>
                 <th>Status</th>
                 <th width="150">Action</th>
@@ -69,11 +69,11 @@
                         <?php } ?>
                     </td>
 
-                    <td><?= $doctor->full_name ?></td>
+                    <td><?= $doctor->name ?></td>
 
-                    <td><?= $doctor->specialization ?></td>
+                    <td><?= $doctor->email ?></td>
 
-                    <td><?= $doctor->qualification ?></td>
+                    <td><?= $doctor->phone ?></td>
 
                     <td class="text-end">
                         <?= number_format($doctor->consultation_fee,2) ?>
@@ -94,11 +94,11 @@
                                 Edit
                             </a>
 
-                            <a href="<?= $base_url ?>/doctor/delete/<?= $doctor->id ?>"
+                            <!-- <a href="<?= $base_url ?>/doctor/delete/<?= $doctor->id ?>"
                                class="btn btn-danger"
                                onclick="return confirm('Are you sure?')">
                                 Delete
-                            </a>
+                            </a> -->
 
                         </div>
 

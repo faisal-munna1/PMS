@@ -21,7 +21,6 @@ class InstructionController
         }
 
         $instruction = $this->instructionData();
-
         $instruction->create();
 
         redirect();
@@ -29,7 +28,13 @@ class InstructionController
 
     public function edit()
     {
-        $data = Instruction::find($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            redirect();
+            return;
+        }
+
+        $data = Instruction::find($id);
 
         view("medicine", compact("data"));
     }
@@ -41,16 +46,22 @@ class InstructionController
         }
 
         $instruction = $this->instructionData();
-        $instruction->id = $_POST["id"];
+        $instruction->id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
-        $instruction->update();
+        if ($instruction->id) {
+            $instruction->update();
+        }
 
         redirect();
     }
 
     public function delete()
     {
-        Instruction::delete($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if ($id) {
+            Instruction::delete($id);
+        }
 
         redirect();
     }
@@ -59,7 +70,7 @@ class InstructionController
     {
         $instruction = new Instruction();
 
-        $instruction->instruction_name = $_POST["instruction_name"];
+        $instruction->instruction_name = filter_input(INPUT_POST, 'instruction_name', FILTER_DEFAULT);
 
         return $instruction;
     }

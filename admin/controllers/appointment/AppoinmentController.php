@@ -4,16 +4,8 @@ class AppointmentController
 {
     public function index()
     {
-        print_r($_SESSION);
-
-        if($_SESSION['role_id'] == 1){
-          $data = Appointment::all_by_user_id($_SESSION['uid']);
-        }else if($_SESSION['role_id'] === 3){
-            $data = Appointment::all();
-        }else{
-             $data = [];
-        }
-
+   
+        $data = Appointment::all();
         view("", compact("data"));
     }
 
@@ -33,12 +25,13 @@ class AppointmentController
 
         $appointment = $this->appointmentData();
 
+        // Automatic serial number calculation based on selected doctor and date
         $appointment->serial_number = Appointment::nextSerial(
             $appointment->doctor_id,
             $appointment->appointment_date
         );
 
-        $appointment->created_by = $_SESSION["user_id"];
+        $appointment->created_by = $_SESSION["user_id"] ?? null;
 
         $appointment->create();
 
@@ -47,16 +40,17 @@ class AppointmentController
 
     public function edit()
     {
-        $data = Appointment::find($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            redirect(); // Id na thakle ba invalid hole back korbe
+            return;
+        }
 
+        $data = Appointment::find($id);
         $patients = Appointment::patients();
         $doctors  = Appointment::doctors();
 
-        view("", compact(
-            "data",
-            "patients",
-            "doctors"
-        ));
+        view("", compact("data", "patients", "doctors"));
     }
 
     public function update()
@@ -66,48 +60,61 @@ class AppointmentController
         }
 
         $appointment = $this->appointmentData();
+        $appointment->id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
-        $appointment->id = $_POST["id"];
-
-        // Generate new serial if doctor or date changed
-        $oldAppointment = Appointment::find($appointment->id);
-
-        if (
-            $oldAppointment->doctor_id != $appointment->doctor_id ||
-            $oldAppointment->appointment_date != $appointment->appointment_date
-        ) {
-            $appointment->serial_number = Appointment::nextSerial(
-                $appointment->doctor_id,
-                $appointment->appointment_date
-            );
-        } else {
-            $appointment->serial_number = $oldAppointment->serial_number;
+        if (!$appointment->id) {
+            redirect();
+            return;
         }
 
-        $appointment->update();
+        // Doctor athoba Date change holei sudhu notun serial asbe
+        $oldAppointment = Appointment::find($appointment->id);
+
+        if ($oldAppointment) {
+            if (
+                $oldAppointment->doctor_id != $appointment->doctor_id ||
+                $oldAppointment->appointment_date != $appointment->appointment_date
+            ) {
+                $appointment->serial_number = Appointment::nextSerial(
+                    $appointment->doctor_id,
+                    $appointment->appointment_date
+                );
+            } else {
+                $appointment->serial_number = $oldAppointment->serial_number;
+            }
+
+            $appointment->update();
+        }
 
         redirect();
     }
 
     public function delete()
     {
-        Appointment::delete($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        
+        if ($id) {
+            Appointment::delete($id);
+        }
 
         redirect();
     }
 
+    /**
+     * Reusable mapping helper to extract post data securely
+     */
     private function appointmentData()
     {
         $appointment = new Appointment();
 
-        $appointment->patient_id         = $_POST["patient_id"];
-        $appointment->doctor_id          = $_POST["doctor_id"];
-        $appointment->appointment_date   = $_POST["appointment_date"];
-        $appointment->appointment_time   = $_POST["appointment_time"];
-        $appointment->reason_for_visit   = $_POST["reason_for_visit"];
-        $appointment->status             = $_POST["status"];
+        // XSS safety dynamically handle korar jonno sanitization use kora bhalo
+        $appointment->patient_id       = filter_input(INPUT_POST, 'patient_id', FILTER_VALIDATE_INT);
+        $appointment->doctor_id        = filter_input(INPUT_POST, 'doctor_id', FILTER_VALIDATE_INT);
+        $appointment->appointment_date = filter_input(INPUT_POST, 'appointment_date', FILTER_DEFAULT);
+        $appointment->appointment_time = filter_input(INPUT_POST, 'appointment_time', FILTER_DEFAULT);
+        $appointment->reason_for_visit = filter_input(INPUT_POST, 'reason_for_visit', FILTER_DEFAULT);
+        $appointment->status           = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
 
         return $appointment;
     }
-
 }

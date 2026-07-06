@@ -10,44 +10,47 @@ class Generic
     {
         global $db;
 
-        return $db->query("
-            INSERT INTO medicine_generics(
-                generic_name,
-                status
-            )
-            VALUES(
-                '$this->generic_name',
-                '$this->status'
-            )
+        $stmt = $db->prepare("
+            INSERT INTO medicine_generics (generic_name, status)
+            VALUES (?, ?)
         ");
+
+        $stmt->bind_param("ss", $this->generic_name, $this->status);
+
+        return $stmt->execute();
     }
 
     public function update()
     {
         global $db;
 
-        return $db->query("
+        $stmt = $db->prepare("
             UPDATE medicine_generics
-            SET
-                generic_name='$this->generic_name',
-                status='$this->status'
-            WHERE id='$this->id'
+            SET generic_name = ?, status = ?
+            WHERE id = ?
         ");
+
+        $stmt->bind_param("ssi", $this->generic_name, $this->status, $this->id);
+
+        return $stmt->execute();
     }
 
     public static function all()
     {
         global $db;
 
-        $stmt = $db->query("
+        $stmt = $db->prepare("
             SELECT *
             FROM medicine_generics
             ORDER BY id DESC
         ");
 
+        $stmt->execute();
+        $result = $stmt->get_result();
+
         return array_map(
             fn($row) => (object)$row,
-            $stmt->fetch_all(MYSQLI_ASSOC)
+            $result->fetch_all(MYSQLI_ASSOC)
         );
     }
 
@@ -55,22 +58,29 @@ class Generic
     {
         global $db;
 
-        $stmt = $db->query("
+        $stmt = $db->prepare("
             SELECT *
             FROM medicine_generics
-            WHERE id='$id'
+            WHERE id = ?
         ");
 
-        return $stmt->fetch_object();
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_object();
     }
 
     public static function delete($id)
     {
         global $db;
 
-        return $db->query("
+        $stmt = $db->prepare("
             DELETE FROM medicine_generics
-            WHERE id='$id'
+            WHERE id = ?
         ");
+
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
     }
 }

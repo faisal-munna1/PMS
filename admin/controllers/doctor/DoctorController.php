@@ -29,7 +29,7 @@ class DoctorController
             $doctor->image = File::upload(
                 $_FILES["image"],
                 "uploads/doctors",
-                $doctor->specialization
+                $doctor->name
             );
         }
 
@@ -38,7 +38,7 @@ class DoctorController
             $doctor->signature_image = File::upload(
                 $_FILES["signature_image"],
                 "uploads/signatures",
-                $doctor->specialization
+                $doctor->name
             );
         }
 
@@ -64,11 +64,9 @@ class DoctorController
         $doctor = $this->doctorData();
         $doctor->id = $_POST["id"];
 
-        $oldDoctor = Doctor::find($doctor->id);
-
         // Doctor Image
+        $oldDoctor = Doctor::find($doctor->id);
         if (!empty($_FILES["image"]["name"])) {
-
             if (!empty($oldDoctor->image)) {
                 File::delete($oldDoctor->image, "uploads/doctors");
             }
@@ -76,7 +74,7 @@ class DoctorController
             $doctor->image = File::upload(
                 $_FILES["image"],
                 "uploads/doctors",
-                $doctor->specialization
+                $doctor->name
             );
 
         } else {
@@ -93,7 +91,7 @@ class DoctorController
             $doctor->signature_image = File::upload(
                 $_FILES["signature_image"],
                 "uploads/signatures",
-                $doctor->specialization
+                $doctor->name
             );
 
         } else {
@@ -128,6 +126,9 @@ class DoctorController
 
         $doctor->user_id = $_POST["user_id"];
         $doctor->specialization = $_POST["specialization"];
+        $doctor->name = $_POST["name"];
+        $doctor->email = $_POST["email"];
+        $doctor->phone = $_POST["phone"];
         $doctor->qualification = $_POST["qualification"];
         $doctor->consultation_fee = $_POST["consultation_fee"];
         $doctor->status = $_POST["status"];

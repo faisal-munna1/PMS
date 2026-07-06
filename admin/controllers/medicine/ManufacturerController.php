@@ -21,7 +21,6 @@ class ManufacturerController
         }
 
         $manufacturer = $this->manufacturerData();
-
         $manufacturer->create();
 
         redirect();
@@ -29,7 +28,13 @@ class ManufacturerController
 
     public function edit()
     {
-        $data = Manufacturer::find($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            redirect();
+            return;
+        }
+
+        $data = Manufacturer::find($id);
 
         view("medicine", compact("data"));
     }
@@ -41,16 +46,22 @@ class ManufacturerController
         }
 
         $manufacturer = $this->manufacturerData();
-        $manufacturer->id = $_POST["id"];
+        $manufacturer->id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
-        $manufacturer->update();
+        if ($manufacturer->id) {
+            $manufacturer->update();
+        }
 
         redirect();
     }
 
     public function delete()
     {
-        Manufacturer::delete($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if ($id) {
+            Manufacturer::delete($id);
+        }
 
         redirect();
     }
@@ -59,8 +70,8 @@ class ManufacturerController
     {
         $manufacturer = new Manufacturer();
 
-        $manufacturer->manufacturer_name = $_POST["manufacturer_name"];
-        $manufacturer->status = $_POST["status"];
+        $manufacturer->manufacturer_name = filter_input(INPUT_POST, 'manufacturer_name', FILTER_DEFAULT);
+        $manufacturer->status            = filter_input(INPUT_POST, 'status', FILTER_DEFAULT);
 
         return $manufacturer;
     }

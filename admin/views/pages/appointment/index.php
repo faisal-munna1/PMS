@@ -1,4 +1,4 @@
-<div class="row mb-4 pb-3 border-bottom">
+<div class="row mb-4 mt-5 pb-3 border-bottom">
 
     <div class="col-sm-6">
         <h3>Appointment List</h3>
@@ -26,7 +26,7 @@
         data-pagination="true"
         data-page-size="10">
 
-        <thead class="table-dark">
+        <thead class="table-dark text-center">
 
             <tr>
 
@@ -91,30 +91,31 @@
 
                     </td>
 
-                    <td>
+                    <td class="text-center">
 
                         <div class="btn-group btn-group-sm">
 
-                            <a href="<?= $base_url ?>/consultation/index/<?= $appointment->patient_id ?>"
-                                class="btn btn-primary">
-
-                                History
-
-                            </a>
+                            
                             <a href="<?= $base_url ?>/appointment/edit/<?= $appointment->id ?>"
-                                class="btn btn-primary">
+                                class="btn btn-primary ">
 
                                 Edit
 
                             </a>
+                            <!-- <a href="<?= $base_url ?>/consultation/index/<?= $appointment->patient_id ?>"
+                                class="btn btn-secondary">
 
-                            <a href="<?= $base_url ?>/appointment/delete/<?= $appointment->id ?>"
+                                History
+
+                            </a> -->
+
+                            <!-- <a href="<?= $base_url ?>/appointment/delete/<?= $appointment->id ?>"
                                 class="btn btn-danger"
                                 onclick="return confirm('Are you sure?')">
 
                                 Delete
 
-                            </a>
+                            </a> -->
 
                         </div>
 

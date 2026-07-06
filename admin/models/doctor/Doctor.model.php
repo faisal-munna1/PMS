@@ -4,7 +4,7 @@ class Doctor
 {
     public $id;
     public $user_id;
-    public $full_name;
+    public $name;
     public $email;
     public $phone;
     public $specialization;
@@ -14,68 +14,105 @@ class Doctor
     public $image;
     public $status;
 
+    public function set(
+        $id,
+        $user_id,
+        $name,
+        $email,
+        $phone,
+        $specialization,
+        $qualification,
+        $consultation_fee,
+        $signature_image,
+        $image,
+        $status
+    ) {
+        $this->id = $id;
+        $this->user_id = $user_id;
+        $this->name = $name;
+        $this->email = $email;
+        $this->phone = $phone;
+        $this->specialization = $specialization;
+        $this->qualification = $qualification;
+        $this->consultation_fee = $consultation_fee;
+        $this->signature_image = $signature_image;
+        $this->image = $image;
+        $this->status = $status;
+    }
+
     public function create()
     {
         global $db;
-
-        return $db->query("
-            INSERT INTO doctors(
-                user_id,
-                full_name,
-                email,
-                phone,
-                specialization,
-                qualification,
-                consultation_fee,
-                signature_image,
-                image,
-                status
+        
+        $stmt = $db->prepare("
+            INSERT INTO doctors
+            (
+                user_id, name, email, phone, specialization, 
+                qualification, consultation_fee, signature_image, image, status
             )
-            VALUES(
-                '$this->user_id',
-                '$this->full_name',
-                '$this->email',
-                '$this->phone',
-                '$this->specialization',
-                '$this->qualification',
-                '$this->consultation_fee',
-                '$this->signature_image',
-                '$this->image',
-                '$this->status'
-            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
+
+        $stmt->bind_param(
+            "isssssssss",
+            $this->user_id,
+            $this->name,
+            $this->email,
+            $this->phone,
+            $this->specialization,
+            $this->qualification,
+            $this->consultation_fee,
+            $this->signature_image,
+            $this->image,
+            $this->status
+        );
+
+        $stmt->execute();
+        return $db->insert_id;
     }
 
     public function update()
     {
         global $db;
 
-        return $db->query("
-            UPDATE doctors SET
-                user_id='$this->user_id',
-                full_name='$this->full_name',
-                email='$this->email',
-                phone='$this->phone',
-                specialization='$this->specialization',
-                qualification='$this->qualification',
-                consultation_fee='$this->consultation_fee',
-                signature_image='$this->signature_image',
-                image='$this->image',
-                status='$this->status'
-            WHERE id='$this->id'
+        $stmt = $db->prepare("
+            UPDATE doctors
+            SET
+                user_id = ?,
+                name = ?,
+                email = ?,
+                phone = ?,
+                specialization = ?,
+                qualification = ?,
+                consultation_fee = ?,
+                signature_image = ?,
+                image = ?,
+                status = ?
+            WHERE id = ?
         ");
+
+        $stmt->bind_param(
+            "isssssssssi",
+            $this->user_id,
+            $this->name,
+            $this->email,
+            $this->phone,
+            $this->specialization,
+            $this->qualification,
+            $this->consultation_fee,
+            $this->signature_image,
+            $this->image,
+            $this->status,
+            $this->id
+        );
+
+        return $stmt->execute();
     }
 
     public static function all()
     {
         global $db;
-
-        $stmt = $db->query("
-            SELECT
-               *
-            FROM doctors 
-           
-        ");
+        $stmt = $db->query(" SELECT * FROM doctors ");
 
         return array_map(
             fn($row) => (object)$row,
@@ -87,27 +124,34 @@ class Doctor
     {
         global $db;
 
-        $stmt = $db->query("
+        $stmt = $db->prepare("
             SELECT *
             FROM doctors
-            WHERE id=$id
-            AND deleted_at IS NULL
+            WHERE id = ?
+            
         ");
 
-        return $stmt->fetch_object();
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_object();
     }
-    public static function find_usedId($id)
+
+    public static function findByUserId($id)
     {
         global $db;
 
-        $stmt = $db->query("
+        $stmt = $db->prepare("
             SELECT *
             FROM doctors
-            WHERE user_id=$id
-            AND deleted_at IS NULL
+            WHERE user_id = ?
+           
         ");
 
-        return $stmt->fetch_object();
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_object();
     }
 
     public static function delete($id)
@@ -117,7 +161,6 @@ class Doctor
         $doctor = self::find($id);
 
         if ($doctor) {
-
             if (!empty($doctor->image)) {
                 File::delete($doctor->image, "uploads/doctors");
             }
@@ -127,10 +170,13 @@ class Doctor
             }
         }
 
-        return $db->query("
+        $stmt = $db->prepare("
             UPDATE doctors
             SET deleted_at = NOW()
-            WHERE id='$id'
+            WHERE id = ?
         ");
+        
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
     }
 }

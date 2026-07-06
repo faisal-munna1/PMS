@@ -53,11 +53,11 @@
                             <a href="<?= $base_url ?>/role/edit/<?= $value->id ?>" class="btn btn-primary">
                                 Edit
                             </a>
-                            <a href="<?= $base_url ?>/role/delete/<?= $value->id ?>"
+                            <!-- <a href="<?= $base_url ?>/role/delete/<?= $value->id ?>"
                                 onclick="return confirm('Are you sure to delete this?')"
                                 class="btn btn-danger">
                                 Delete
-                            </a>
+                            </a> -->
                         </div>
                     </td>
                 </tr>

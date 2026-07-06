@@ -1,3 +1,11 @@
+<?php 
+
+print_r($data);
+
+?>
+
+
+
 <form method="post" action="<?php echo $base_url; ?>/doctor/update" enctype="multipart/form-data">
 
     <input type="hidden" name="id" value="<?= $data->id ?>">
@@ -29,12 +37,12 @@
             </div>
             <!-- Full Name -->
             <div class="col-md-12 mb-3">
-                <label class="form-label">Full Name</label>
+                <label class="form-label">Name</label>
                 <input type="text"
                     class="form-control"
-                    name="full_name"
-                    <?= $data->full_name ?>
-                    placeholder="Enter full_name">
+                    name="name"
+                    value="<?= $data->name ?>"
+                    placeholder="Enter Name">
             </div>
             <!-- email -->
             <div class="col-md-6 mb-3">
@@ -42,7 +50,7 @@
                 <input type="text"
                     class="form-control"
                     name="email"
-                    <?= $data->email ?>
+                     value="<?= $data->email ?>"
                     placeholder="Enter email">
             </div>
             <!-- phone -->
@@ -51,7 +59,7 @@
                 <input type="text"
                     class="form-control"
                     name="phone"
-                    <?= $data->phone ?>
+                    value="<?= $data->phone ?>"
                     placeholder="Enter phone">
             </div>
 

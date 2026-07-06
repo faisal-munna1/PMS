@@ -40,7 +40,8 @@
         <thead class="table-dark text-center">
             <tr>
                 <th>S/L</th>
-                <th>Role ID</th>
+                <th>Role</th>
+                <th>Image</th>
                 <th>Username</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -59,6 +60,7 @@
                 <td class="text-center"><?= $key + 1 ?></td>
 
                 <td><?= htmlspecialchars($value->role) ?></td>
+                <td><img src="<?= $base_url ?>/uploads/users/<?= $value->image ?>" class="img-fluid" width="40"></td>
 
                 <td><?= htmlspecialchars($value->username) ?></td>
 
@@ -84,11 +86,11 @@
                             Edit
                         </a>
 
-                        <a href="<?= $base_url ?>/user/delete/<?= $value->id ?>"
+                        <!-- <a href="<?= $base_url ?>/user/delete/<?= $value->id ?>"
                            class="btn btn-danger"
                            onclick="return confirm('Are you sure to delete this?')">
                             Delete
-                        </a>
+                        </a> -->
 
                     </div>
                 </td>

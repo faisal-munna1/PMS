@@ -21,7 +21,6 @@ class DurationController
         }
 
         $duration = $this->durationData();
-
         $duration->create();
 
         redirect();
@@ -29,7 +28,13 @@ class DurationController
 
     public function edit()
     {
-        $data = Duration::find($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            redirect();
+            return;
+        }
+
+        $data = Duration::find($id);
 
         view("medicine", compact("data"));
     }
@@ -41,16 +46,22 @@ class DurationController
         }
 
         $duration = $this->durationData();
-        $duration->id = $_POST["id"];
+        $duration->id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
-        $duration->update();
+        if ($duration->id) {
+            $duration->update();
+        }
 
         redirect();
     }
 
     public function delete()
     {
-        Duration::delete($_GET["id"]);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if ($id) {
+            Duration::delete($id);
+        }
 
         redirect();
     }
@@ -59,7 +70,7 @@ class DurationController
     {
         $duration = new Duration();
 
-        $duration->duration_name = $_POST["duration_name"];
+        $duration->duration_name = filter_input(INPUT_POST, 'duration_name', FILTER_DEFAULT);
 
         return $duration;
     }
