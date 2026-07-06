@@ -94,6 +94,34 @@ class Consultation
             $stmt->fetch_all(MYSQLI_ASSOC)
         );
     }
+    public static function all_by_patient_id($patient_id)
+    {
+        global $db;
+
+        $stmt = $db->query("
+            SELECT
+                c.*,
+                p.name AS patient_name,
+                u.name AS doctor_name,
+                a.serial_number
+            FROM consultations c
+            INNER JOIN patients p
+                ON c.patient_id = p.id
+            INNER JOIN doctors d
+                ON c.doctor_id = d.id
+            INNER JOIN users u
+                ON d.user_id = u.id
+            INNER JOIN appointments a
+                ON c.appointment_id = a.id
+            WHERE c.deleted_at IS NULL and a.patient_id = $patient_id
+            ORDER BY c.id DESC
+        ");
+
+        return array_map(
+            fn($row) => (object)$row,
+            $stmt->fetch_all(MYSQLI_ASSOC)
+        );
+    }
 
     public static function find($id)
     {

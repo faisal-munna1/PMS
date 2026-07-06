@@ -69,7 +69,7 @@
                         <?php } ?>
                     </td>
 
-                    <td><?= $doctor->doctor_name ?></td>
+                    <td><?= $doctor->full_name ?></td>
 
                     <td><?= $doctor->specialization ?></td>
 

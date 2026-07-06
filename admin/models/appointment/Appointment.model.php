@@ -87,6 +87,65 @@ class Appointment
         );
     }
 
+public static function all_by_user_id($id)
+    {
+        global $db;
+
+        $stmt = $db->query("
+            SELECT
+                a.*,
+                p.patient_code,
+                p.name AS patient_name,
+                u.name AS doctor_name
+            FROM appointments a
+            INNER JOIN patients p
+                ON a.patient_id = p.id
+            INNER JOIN doctors d
+                ON a.doctor_id = d.id
+            INNER JOIN users u
+                ON d.user_id = u.id
+            WHERE a.deleted_at IS NULL and
+            doctor_id= $id
+            ORDER BY
+                a.appointment_date DESC,
+                a.appointment_time ASC,
+                a.serial_number ASC
+        ");
+
+        return array_map(
+            fn($row) => (object)$row,
+            $stmt->fetch_all(MYSQLI_ASSOC)
+        );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static function find($id)
     {
         global $db;

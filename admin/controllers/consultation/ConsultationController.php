@@ -4,7 +4,14 @@ class ConsultationController
 {
     public function index()
     {
-        $data = Consultation::all();
+        if(isset($_GET['id'])){
+          $patients_id= $_GET['id'];
+
+           $data = Consultation::all_by_patient_id($patients_id);
+        }else{
+
+            $data = Consultation::all();
+        }
 
         view("", compact("data"));
     }

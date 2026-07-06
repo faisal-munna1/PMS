@@ -4,6 +4,9 @@ class Doctor
 {
     public $id;
     public $user_id;
+    public $full_name;
+    public $email;
+    public $phone;
     public $specialization;
     public $qualification;
     public $consultation_fee;
@@ -18,6 +21,9 @@ class Doctor
         return $db->query("
             INSERT INTO doctors(
                 user_id,
+                full_name,
+                email,
+                phone,
                 specialization,
                 qualification,
                 consultation_fee,
@@ -27,6 +33,9 @@ class Doctor
             )
             VALUES(
                 '$this->user_id',
+                '$this->full_name',
+                '$this->email',
+                '$this->phone',
                 '$this->specialization',
                 '$this->qualification',
                 '$this->consultation_fee',
@@ -44,6 +53,9 @@ class Doctor
         return $db->query("
             UPDATE doctors SET
                 user_id='$this->user_id',
+                full_name='$this->full_name',
+                email='$this->email',
+                phone='$this->phone',
                 specialization='$this->specialization',
                 qualification='$this->qualification',
                 consultation_fee='$this->consultation_fee',
@@ -60,13 +72,9 @@ class Doctor
 
         $stmt = $db->query("
             SELECT
-                d.*,
-                u.name AS doctor_name
-            FROM doctors d
-            LEFT JOIN users u
-                ON d.user_id = u.id
-            WHERE d.deleted_at IS NULL
-            ORDER BY d.id DESC
+               *
+            FROM doctors 
+           
         ");
 
         return array_map(
@@ -82,7 +90,20 @@ class Doctor
         $stmt = $db->query("
             SELECT *
             FROM doctors
-            WHERE id='$id'
+            WHERE id=$id
+            AND deleted_at IS NULL
+        ");
+
+        return $stmt->fetch_object();
+    }
+    public static function find_usedId($id)
+    {
+        global $db;
+
+        $stmt = $db->query("
+            SELECT *
+            FROM doctors
+            WHERE user_id=$id
             AND deleted_at IS NULL
         ");
 

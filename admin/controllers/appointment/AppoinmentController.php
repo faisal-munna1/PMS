@@ -4,7 +4,15 @@ class AppointmentController
 {
     public function index()
     {
-        $data = Appointment::all();
+        print_r($_SESSION);
+
+        if($_SESSION['role_id'] == 1){
+          $data = Appointment::all_by_user_id($_SESSION['uid']);
+        }else if($_SESSION['role_id'] === 3){
+            $data = Appointment::all();
+        }else{
+             $data = [];
+        }
 
         view("", compact("data"));
     }

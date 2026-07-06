@@ -29,7 +29,22 @@ class UserController
             $user->phone = $_POST["phone"];
             $user->status = $_POST["status"];
 
-            $user->create();
+            $userId =  $user->create();
+
+            if ($_POST["role_id"] == 1) {
+                $doctor = new Doctor();
+                $doctor->user_id = $userId;
+                $doctor->full_name = $_POST["name"];
+                $doctor->email = $_POST["email"];
+                $doctor->phone = $_POST["phone"];
+                $doctor->create();
+            }
+
+
+
+
+
+
 
             redirect("user/index");
         }
@@ -64,6 +79,22 @@ class UserController
 
             $user->update();
 
+            //doctor update
+
+            $found_doctor = Doctor::find_usedId($_POST["id"]);
+            $user_id = $_POST["id"];
+            if ($found_doctor->user_id == $user_id) {
+                $doctor = new Doctor();
+                $doctor->user_id=  $_POST["id"];
+                $doctor->id = $found_doctor->id;
+                $doctor->full_name = $_POST["name"];
+                $doctor->email = $_POST["email"];
+                $doctor->phone = $_POST["phone"];
+                $doctor->update();
+            }
+
+
+
             redirect("user/index");
         }
     }
@@ -73,7 +104,4 @@ class UserController
         User::delete($_GET["id"]);
         redirect("user/index");
     }
-
 }
-
-?>

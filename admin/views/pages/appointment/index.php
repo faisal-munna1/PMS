@@ -95,6 +95,12 @@
 
                         <div class="btn-group btn-group-sm">
 
+                            <a href="<?= $base_url ?>/consultation/index/<?= $appointment->patient_id ?>"
+                                class="btn btn-primary">
+
+                                History
+
+                            </a>
                             <a href="<?= $base_url ?>/appointment/edit/<?= $appointment->id ?>"
                                 class="btn btn-primary">
 
