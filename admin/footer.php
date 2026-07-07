@@ -45,6 +45,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo $base_url?>/asset/dist/js/pages/dashboard.js"></script>
 <script src="<?php echo $base_url?>/js/helper.js"></script>
+
 <script>
    $(function(){
        

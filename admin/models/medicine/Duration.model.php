@@ -5,6 +5,28 @@ class Duration
     public $id;
     public $duration_name;
 
+
+public static function html_select($name="cmbMedicine_durations")
+    {
+        global $db;
+
+        $stmt = $db->query("
+            SELECT *
+            FROM medicine_durations
+            ORDER BY id
+        ");
+
+       $html="<select name='$name' id='$name' class='form-select'>";
+            while(  $row = $stmt->fetch_object()){
+                $html.=" <option value='$row->id'>$row->duration_name</option>";
+            }
+
+        return $html.= "</select>";
+    }
+
+
+    
+
     public function create()
     {
         global $db;

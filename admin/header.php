@@ -6,8 +6,8 @@
   require_once("models/model.php");
   require_once("controllers/controller.php");
   
-  if(!isset($_SESSION["uid"])) header("location:$base_url");
-  $uid=$_SESSION["uid"];
+  // if(!isset($_SESSION["uid"])) header("location:$base_url");
+  // $uid=$_SESSION["uid"];
   
 
 ?>
@@ -49,6 +49,8 @@
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="<?php echo $base_url?>/asset/plugins/jquery/jquery.min.js"></script>
+<script src="<?php echo $base_url?>/js/cart2.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

@@ -6,7 +6,7 @@ class PrescriptionController
     {
         $data = Prescription::all();
 
-        view("", compact("data"));
+        view("prescription", compact("data"));
     }
 
     public function create()
@@ -15,7 +15,7 @@ class PrescriptionController
         $patients      = Patient::all();
         $doctors       = Doctor::all();
 
-        view( "",compact("consultations", "patients", "doctors") );
+        view( "prescription",compact("consultations", "patients", "doctors") );
     }
 
     public function save()
@@ -81,5 +81,22 @@ class PrescriptionController
         $prescription->prescription_date = $_POST["prescription_date"];
 
         return $prescription;
+    }
+
+
+     public function prescription()
+    {
+       $cosultation_id= $_GET["id"];
+       $consultation= Consultation::find($cosultation_id);
+       $patients= Patient::find($consultation->patient_id);
+       $doctor= Doctor::find($consultation->doctor_id);
+       $medicine= Medicine::all();
+       $dose= Dose::all();
+       $instruction= Instruction::all();
+       $duration= Duration::all();
+    
+
+    //    print_r($consultation);
+        view("prescription", compact("consultation","patients","doctor","medicine", "dose","instruction",'duration'));
     }
 }

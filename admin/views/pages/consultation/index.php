@@ -91,6 +91,11 @@
                                 Edit
 
                             </a>
+                            <a href="<?= $base_url ?>/prescription/prescription/<?= $consultation->id ?>"
+                                class="btn btn-primary">
+                                prescription
+
+                            </a>
 
                             <!-- <a href="<?= $base_url ?>/consultation/delete/<?= $consultation->id ?>"
                                 class="btn btn-danger"

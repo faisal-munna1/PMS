@@ -1,3 +1,8 @@
+drop database if exists pms;
+create database if not exists pms;
+use pms;
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/

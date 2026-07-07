@@ -10,6 +10,26 @@ class Medicine
     public $strength_id;
     public $status;
 
+
+public static function html_select($name="cmbMedicines")
+    {
+        global $db;
+
+        $stmt = $db->query("
+            SELECT *
+            FROM medicines
+            ORDER BY id
+        ");
+
+       $html="<select name='$name' id='$name' class='form-select'>";
+            while(  $row = $stmt->fetch_object()){
+                $html.=" <option value='$row->id'>$row->medicine_name</option>";
+            }
+
+        return $html.= "</select>";
+    }
+
+
     public function create()
     {
         global $db;

@@ -82,4 +82,23 @@ class Dose
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+
+
+    public static function html_select($name="cmbDose")
+    {
+        global $db;
+
+        $stmt = $db->query("
+            SELECT *
+            FROM medicine_doses
+            ORDER BY id
+        ");
+
+       $html="<select name='$name' id='$name' class='form-select'>";
+            while(  $row = $stmt->fetch_object()){
+                $html.=" <option value='$row->id'>$row->dose_name</option>";
+            }
+
+        return $html.= "</select>";
+    }
 }
