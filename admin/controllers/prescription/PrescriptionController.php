@@ -96,7 +96,7 @@ class PrescriptionController
        $duration= Duration::all();
     
 
-    //    print_r($consultation);
+       print_r($doctor);
         view("prescription", compact("consultation","patients","doctor","medicine", "dose","instruction",'duration'));
     }
 }

@@ -1,132 +1,174 @@
-<div class="row mb-4 mt-5 pb-3 border-bottom">
+<div class="row mb-3 align-items-center">
 
     <div class="col-sm-6">
-        <h3>Appointment List</h3>
+        <h3 class="mb-0 fw-semibold">Appointment Management</h3>
     </div>
 
-    <div class="col-sm-6 text-end">
-
-        <a href="<?= $base_url ?>/appointment/create"
-            class="btn btn-primary">
-
-            Add Appointment
-
-        </a>
-
+    <div class="col-sm-6">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb float-sm-end mb-0">
+                <li class="breadcrumb-item">
+                    <a href="<?= $base_url ?>">
+                        <i class="bi bi-house-door-fill me-1"></i> Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item">Appointment</li>
+                <li class="breadcrumb-item active">List</li>
+            </ol>
+        </nav>
     </div>
 
 </div>
 
-<div class="table-responsive">
+<div class="card card-outline card-primary shadow-sm">
 
-    <table
-        class="table table-bordered table-striped table-hover"
-        data-toggle="table"
-        data-search="true"
-        data-pagination="true"
-        data-page-size="10">
+    <div class="card-header">
 
-        <thead class="table-dark text-center">
+        <div class="row align-items-center g-2">
 
-            <tr>
+            <div class="col-md-4">
+                <h3 class="card-title mb-0">
+                    <i class="bi bi-calendar-check me-2"></i>
+                    Appointment List
+                </h3>
+            </div>
 
-                <th>#</th>
-                <th>Patient</th>
-                <th>Doctor</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Serial</th>
-                <th>Status</th>
-                <th width="140">Action</th>
+            <div class="col-md-8">
 
-            </tr>
+                <form action="<?= $base_url ?>/appointment/index"
+                      method="get"
+                      class="row g-2 justify-content-md-end">
 
-        </thead>
+                    <div class="col-auto">
 
-        <tbody>
+                        <input type="date"
+                               name="appointment_date"
+                               class="form-control form-control-sm"
+                               value="<?= $_GET['appointment_date'] ?? '' ?>">
 
-            <?php foreach($data as $key=>$appointment){ ?>
+                    </div>
 
-                <tr>
+                    <div class="col-auto">
 
-                    <td><?= $key+1 ?></td>
+                        <button type="submit"
+                                class="btn btn-info btn-sm">
 
-                    <td>
-                        <?= $appointment->patient_code ?>
-                        <br>
-                        <small><?= $appointment->patient_name ?></small>
-                    </td>
+                            <i class="bi bi-search"></i>
 
-                    <td><?= $appointment->doctor_name ?></td>
+                        </button>
 
-                    <td>
-                        <?= date("d M, Y",strtotime($appointment->appointment_date)) ?>
-                    </td>
+                    </div>
 
-                    <td>
-                        <?= date("h:i A",strtotime($appointment->appointment_time)) ?>
-                    </td>
+                    <?php if (!empty($_GET['appointment_date'])): ?>
 
-                    <td>
-                        <?= $appointment->serial_number ?>
-                    </td>
+                        <div class="col-auto">
 
-                    <td>
+                            <a href="<?= $base_url ?>/appointment/index"
+                               class="btn btn-secondary btn-sm">
 
-                        <?php
-
-                        $badge = [
-                            "scheduled"=>"warning",
-                            "checked-in"=>"info",
-                            "in-consultation"=>"primary",
-                            "completed"=>"success",
-                            "cancel"=>"danger"
-                        ];
-
-                        ?>
-
-                        <span class="badge bg-<?= $badge[$appointment->status] ?>">
-                            <?= ucwords(str_replace("-"," ",$appointment->status)) ?>
-                        </span>
-
-                    </td>
-
-                    <td class="text-center">
-
-                        <div class="btn-group btn-group-sm">
-
-                            
-                            <a href="<?= $base_url ?>/appointment/edit/<?= $appointment->id ?>"
-                                class="btn btn-primary ">
-
-                                Edit
+                                <i class="bi bi-arrow-clockwise"></i>
 
                             </a>
-                            <!-- <a href="<?= $base_url ?>/consultation/index/<?= $appointment->patient_id ?>"
-                                class="btn btn-secondary">
-
-                                History
-
-                            </a> -->
-
-                            <!-- <a href="<?= $base_url ?>/appointment/delete/<?= $appointment->id ?>"
-                                class="btn btn-danger"
-                                onclick="return confirm('Are you sure?')">
-
-                                Delete
-
-                            </a> -->
 
                         </div>
 
-                    </td>
+                    <?php endif; ?>
 
+                    <div class="col-auto">
+
+                        <a href="<?= $base_url ?>/appointment/create"
+                           class="btn btn-primary btn-sm">
+
+                            <i class="bi bi-plus-circle me-1"></i>
+                            Add Appointment
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover table-striped align-middle w-100 datatable">
+
+            <thead>
+                <tr>
+                    <th width="60">#</th>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Serial</th>
+                    <th width="120">Status</th>
+                    <th width="90" class="text-center">Action</th>
                 </tr>
+            </thead>
 
-            <?php } ?>
+            <tbody>
 
-        </tbody>
+                <?php foreach ($data as $key => $appointment): ?>
 
-    </table>
+                    <?php
+                    $badge = [
+                        "scheduled"       => "warning",
+                        "checked-in"      => "info",
+                        "in-consultation" => "primary",
+                        "completed"       => "success",
+                        "cancel"          => "danger"
+                    ];
+                    ?>
+
+                    <tr>
+
+                        <td class="text-center"><?= $key + 1 ?></td>
+
+                        <td>
+                            <strong><?= htmlspecialchars($appointment->patient_code) ?></strong><br>
+                            <small class="text-muted">
+                                <?= htmlspecialchars($appointment->patient_name) ?>
+                            </small>
+                        </td>
+
+                        <td><?= htmlspecialchars($appointment->doctor_name) ?></td>
+
+                        <td><?= date("d M, Y", strtotime($appointment->appointment_date)) ?></td>
+
+                        <td><?= date("h:i A", strtotime($appointment->appointment_time)) ?></td>
+
+                        <td><?= $appointment->serial_number ?></td>
+
+                        <td class="text-center">
+                            <span class="badge text-bg-<?= $badge[$appointment->status] ?>">
+                                <?= ucwords(str_replace("-", " ", $appointment->status)) ?>
+                            </span>
+                        </td>
+
+                        <td class="text-center">
+
+                            <a href="<?= $base_url ?>/appointment/edit/<?= $appointment->id ?>"
+                               class="btn btn-primary btn-sm">
+
+                                <i class="bi bi-pencil-square"></i>
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                <?php endforeach; ?>
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>

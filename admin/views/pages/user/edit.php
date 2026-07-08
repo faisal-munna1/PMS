@@ -1,146 +1,200 @@
-<div class="col-md-8 mx-auto mt-5">
+<div class="row justify-content-center">
 
-    <div class="card card-primary card-outline shadow">
+    <div class="col-lg-8">
 
-        <div class="card-header">
+        <div class="card card-outline card-primary shadow-sm">
 
-            <h3 class="card-title fw-bold">Edit User Information</h3>
+            <div class="card-header">
 
-            <a href="<?= $base_url ?>/user/index" class="btn btn-primary btn-sm float-end">
-                Show Users
-            </a>
+                <h3 class="card-title">
+                    <i class="bi bi-pencil-square me-2"></i>
+                    Edit User
+                </h3>
 
-        </div>
+                <div class="card-tools">
+                    <a href="<?= $base_url ?>/user/index" class="btn btn-primary btn-sm">
+                        <i class="bi bi-list-ul me-1"></i>
+                        User List
+                    </a>
+                </div>
 
-        <form action="<?= $base_url ?>/user/update" method="post" enctype="multipart/form-data">
+            </div>
 
-            <div class="card-body">
+            <form action="<?= $base_url ?>/user/update"
+                  method="post"
+                  enctype="multipart/form-data">
 
-                <input type="hidden" name="id" value="<?= $data->id ?>">
+                <div class="card-body">
 
-                <!-- Role -->
-                <div class="mb-3">
+                    <input type="hidden" name="id" value="<?= $data->id ?>">
 
-                    <label class="form-label">
-                        Role <span class="text-danger">*</span>
-                    </label>
+                    <div class="mb-3">
 
-                    <select name="role_id" class="form-select" required>
+                        <label class="form-label">
+                            Role <span class="text-danger">*</span>
+                        </label>
 
-                        <?php foreach ($roles as $role): ?>
+                        <select name="role_id"
+                                class="form-select select2"
+                                required>
 
-                            <option value="<?= $role->id ?>" <?= $role->id == $data->role_id ? "selected" : "" ?>>
-                                <?= $role->name ?>
+                            <?php foreach ($roles as $role): ?>
+
+                                <option value="<?= $role->id ?>"
+                                    <?= $role->id == $data->role_id ? "selected" : "" ?>>
+
+                                    <?= htmlspecialchars($role->name) ?>
+
+                                </option>
+
+                            <?php endforeach; ?>
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Profile Image
+                        </label>
+
+                        <input type="file"
+                               name="image"
+                               class="form-control"
+                               accept="image/*">
+
+                        <?php if (!empty($data->image)): ?>
+
+                            <div class="mt-3">
+                                <img src="<?= $base_url ?>/uploads/users/<?= $data->image ?>"
+                                     alt="<?= htmlspecialchars($data->name) ?>"
+                                     class="img-thumbnail rounded"
+                                     width="120">
+                            </div>
+
+                        <?php endif; ?>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Username <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="text"
+                               name="username"
+                               class="form-control"
+                               value="<?= htmlspecialchars($data->username) ?>"
+                               required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               placeholder="Leave blank to keep current password">
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Full Name <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               value="<?= htmlspecialchars($data->name) ?>"
+                               required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Email Address <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="email"
+                               name="email"
+                               class="form-control"
+                               value="<?= htmlspecialchars($data->email) ?>"
+                               required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Phone Number <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="text"
+                               name="phone"
+                               class="form-control"
+                               value="<?= htmlspecialchars($data->phone) ?>"
+                               required>
+
+                    </div>
+
+                    <div class="mb-0">
+
+                        <label class="form-label">
+                            Status
+                        </label>
+
+                        <select name="status"
+                                class="form-select">
+
+                            <option value="active"
+                                <?= $data->status == "active" ? "selected" : "" ?>>
+                                Active
                             </option>
 
-                        <?php endforeach; ?>
+                            <option value="inactive"
+                                <?= $data->status == "inactive" ? "selected" : "" ?>>
+                                Inactive
+                            </option>
 
-                    </select>
+                        </select>
 
-                </div>
-
-                <!-- Profile Image -->
-                <div class="mb-3">
-
-                    <label class="form-label">Profile Image</label>
-
-                    <input type="file" name="image" class="form-control">
-
-                    <?php if (!empty($data->image)): ?>
-
-                        <img src="<?= $base_url ?>/uploads/users/<?= $data->image ?>" class="img-thumbnail mt-3" width="120" alt="User Image">
-
-                    <?php endif; ?>
+                    </div>
 
                 </div>
 
-                <!-- Username -->
-                <div class="mb-3">
+                <div class="card-footer">
 
-                    <label class="form-label">
-                        Username <span class="text-danger">*</span>
-                    </label>
+                    <button type="submit"
+                            name="btn_submit"
+                            class="btn btn-primary">
 
-                    <input type="text" name="username" class="form-control" value="<?= $data->username ?>" required>
+                        <i class="bi bi-check-circle me-1"></i>
+                        Update
 
-                </div>
+                    </button>
 
-                <!-- Password -->
-                <div class="mb-3">
+                    <a href="<?= $base_url ?>/user/index"
+                       class="btn btn-secondary">
 
-                    <label class="form-label">Password</label>
+                        <i class="bi bi-x-circle me-1"></i>
+                        Cancel
 
-                    <input type="password" name="password" class="form-control" placeholder="Leave blank to keep current password">
-
-                </div>
-
-                <!-- Full Name -->
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Full Name <span class="text-danger">*</span>
-                    </label>
-
-                    <input type="text" name="name" class="form-control" value="<?= $data->name ?>" required>
+                    </a>
 
                 </div>
 
-                <!-- Email -->
-                <div class="mb-3">
+            </form>
 
-                    <label class="form-label">
-                        Email Address <span class="text-danger">*</span>
-                    </label>
-
-                    <input type="email" name="email" class="form-control" value="<?= $data->email ?>" required>
-
-                </div>
-
-                <!-- Phone -->
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Phone Number <span class="text-danger">*</span>
-                    </label>
-
-                    <input type="text" name="phone" class="form-control" value="<?= $data->phone ?>" required>
-
-                </div>
-
-                <!-- Status -->
-                <div class="mb-3">
-
-                    <label class="form-label">Status</label>
-
-                    <select name="status" class="form-select">
-
-                        <option value="active" <?= $data->status == "active" ? "selected" : "" ?>>
-                            Active
-                        </option>
-
-                        <option value="inactive" <?= $data->status == "inactive" ? "selected" : "" ?>>
-                            Inactive
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-            <div class="card-footer">
-
-                <button type="submit" name="btn_submit" class="btn btn-primary">
-                    <i class="fas fa-save"></i> Update User
-                </button>
-
-                <a href="<?= $base_url ?>/user/index" class="btn btn-secondary">
-                    <i class="fas fa-times"></i> Cancel
-                </a>
-
-            </div>
-
-        </form>
+        </div>
 
     </div>
 

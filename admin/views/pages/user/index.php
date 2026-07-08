@@ -1,105 +1,121 @@
-<div class="row mb-4 pb-3 border-bottom">
-    <div class="col-sm-6 text-sm-start mb-2 mb-sm-0">
-        <h1 class="mb-0 fs-3 fw-bold text-dark">User Tables</h1>
+<div class="row mb-3 align-items-center">
+    <div class="col-sm-6">
+        <h3 class="mb-0 fw-semibold">User Management</h3>
     </div>
 
     <div class="col-sm-6">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center justify-content-sm-end mb-0 bg-transparent p-0">
+            <ol class="breadcrumb float-sm-end mb-0">
                 <li class="breadcrumb-item">
-                    <a href="#" class="text-decoration-none">
-                        Home
+                    <a href="<?= $base_url ?>">
+                        <i class="bi bi-house-door-fill me-1"></i> Home
                     </a>
                 </li>
-                <li class="breadcrumb-item">
-                    <a href="#" class="text-decoration-none">Tables</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                    User
-                </li>
+                <li class="breadcrumb-item">User Management</li>
+                <li class="breadcrumb-item active">User</li>
             </ol>
         </nav>
     </div>
 </div>
 
-<div class="mb-3 text-end">
-    <a href="<?= $base_url ?>/user/create" class="btn btn-primary">
-        Add User
-    </a>
-</div>
+<div class="card card-outline card-primary shadow-sm">
 
-<div class="table-responsive rounded border">
-    <table
-        data-toggle="table"
-        data-search="true"
-        data-pagination="true"
-        data-page-size="5"
-        data-search-highlight="true"
-        class="table table-striped table-hover table-bordered mb-0 align-middle">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="bi bi-people me-2"></i>
+            User List
+        </h3>
 
-        <thead class="table-dark text-center">
-            <tr>
-                <th>S/L</th>
-                <th>Role</th>
-                <th>Image</th>
-                <th>Username</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+        <div class="card-tools">
+            <a href="<?= $base_url ?>/user/create" class="btn btn-primary btn-sm">
+                <i class="bi bi-plus-circle me-1"></i>
+                Add User
+            </a>
+        </div>
+    </div>
 
-        <tbody>
+    <div class="card-body">
 
-            <?php foreach($data as $key => $value): ?>
+        <table class="table table-bordered table-hover table-striped align-middle w-100 datatable">
 
-            <tr>
+            <thead>
+                <tr>
+                    <th width="60">S/L</th>
+                    <th>Role</th>
+                    <th width="70">Image</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th width="90">Status</th>
+                    <th width="100" class="text-center">Action</th>
+                </tr>
+            </thead>
 
-                <td class="text-center"><?= $key + 1 ?></td>
+            <tbody>
 
-                <td><?= htmlspecialchars($value->role) ?></td>
-                <td><img src="<?= $base_url ?>/uploads/users/<?= $value->image ?>" class="img-fluid" width="40"></td>
+                <?php foreach ($data as $key => $value): ?>
 
-                <td><?= htmlspecialchars($value->username) ?></td>
+                    <tr>
 
-                <td><?= htmlspecialchars($value->name) ?></td>
+                        <td class="text-center">
+                            <?= $key + 1 ?>
+                        </td>
 
-                <td><?= htmlspecialchars($value->email) ?></td>
+                        <td>
+                            <?= htmlspecialchars($value->role) ?>
+                        </td>
 
-                <td><?= htmlspecialchars($value->phone) ?></td>
+                        <td class="text-center">
+                            <img src="<?= $base_url ?>/uploads/users/<?= $value->image ?>"
+                                 alt="<?= htmlspecialchars($value->name) ?>"
+                                 class="img-circle border"
+                                 width="40"
+                                 height="40"
+                                 style="object-fit:cover;">
+                        </td>
 
-                <td class="text-center">
-                    <?php if($value->status == "active"): ?>
-                        <span class="badge bg-success">Active</span>
-                    <?php else: ?>
-                        <span class="badge bg-danger">Inactive</span>
-                    <?php endif; ?>
-                </td>
+                        <td>
+                            <?= htmlspecialchars($value->username) ?>
+                        </td>
 
-                <td class="text-center">
-                    <div class="btn-group btn-group-sm">
+                        <td>
+                            <?= htmlspecialchars($value->name) ?>
+                        </td>
 
-                        <a href="<?= $base_url ?>/user/edit/<?= $value->id ?>"
-                           class="btn btn-primary">
-                            Edit
-                        </a>
+                        <td>
+                            <?= htmlspecialchars($value->email) ?>
+                        </td>
 
-                        <!-- <a href="<?= $base_url ?>/user/delete/<?= $value->id ?>"
-                           class="btn btn-danger"
-                           onclick="return confirm('Are you sure to delete this?')">
-                            Delete
-                        </a> -->
+                        <td>
+                            <?= htmlspecialchars($value->phone) ?>
+                        </td>
 
-                    </div>
-                </td>
+                        <td class="text-center">
+                            <?php if ($value->status == "active"): ?>
+                                <span class="badge text-bg-success">Active</span>
+                            <?php else: ?>
+                                <span class="badge text-bg-danger">Inactive</span>
+                            <?php endif; ?>
+                        </td>
 
-            </tr>
+                        <td class="text-center">
 
-            <?php endforeach; ?>
+                            <a href="<?= $base_url ?>/user/edit/<?= $value->id ?>"
+                               class="btn btn-primary btn-sm">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
 
-        </tbody>
+                        </td>
 
-    </table>
+                    </tr>
+
+                <?php endforeach; ?>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
 </div>
