@@ -12,7 +12,7 @@ class Prescription
     {
         global $db;
 
-        return $db->query("
+         $db->query("
             INSERT INTO prescriptions(
                 consultation_id,
                 patient_id,
@@ -26,6 +26,8 @@ class Prescription
                 '$this->prescription_date'
             )
         ");
+
+        return $db->insert_id;
     }
 
     public function update()

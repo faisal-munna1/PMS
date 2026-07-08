@@ -179,4 +179,34 @@ class Doctor
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+
+
+
+    public  function updateUserInfo()
+{
+    global $db;
+
+    $stmt = $db->prepare("
+        UPDATE doctors
+        SET
+            name=?,
+            email=?,
+            phone=?,
+            image=?,
+            status=?
+        WHERE user_id=?
+    ");
+
+    $stmt->bind_param(
+        "sssssi",
+        $this->name,
+        $this->email,
+        $this->phone,
+        $this->image,
+        $this->status,
+        $this->user_id
+    );
+
+    return $stmt->execute();
+}
 }

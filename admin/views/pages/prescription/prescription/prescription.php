@@ -1,3 +1,15 @@
+<?php 
+
+print_r($data)
+
+
+
+?>
+
+
+
+
+
 <!-- Custom CSS for A4 Page Print Optimization -->
 <style>
 @media print {
@@ -86,6 +98,12 @@
               <p class="mb-1 text-secondary small">National Institute of Neurosciences & Hospital, Dhaka, Bangladesh</p>
             </div>
 
+            <div>
+                <input  class="consultation_id"  type="text"   value="<?php echo  $consultation->id  ?>">
+                <input  class="doctor_id"  type="text"   value="<?php echo  $doctor->id  ?>">
+                <input  class="patient_id"  type="text"   value="<?php echo  $patients->id  ?>">
+            </div>
+
             <div class="col-lg-4 text-left">
               <table class="table table-borderless table-sm mb-0 float-lg-start" style="max-width: 280px;">
                 <tr>
@@ -120,12 +138,14 @@
 
               <section class="mb-4">
                 <h6 class="text-body-emphasis fw-bold border-bottom pb-2 mb-2">Chief Complaint</h6>
-                <ul class="list-unstyled small text-secondary mb-0">
+                <!-- <ul class="list-unstyled small text-secondary mb-0">
                   <li class="mb-1"><i class="bi bi-dot text-primary fs-5 align-middle"></i> Severe Headache</li>
                   <li class="mb-1"><i class="bi bi-dot text-primary fs-5 align-middle"></i> Neck Pain</li>
                   <li class="mb-1"><i class="bi bi-dot text-primary fs-5 align-middle"></i> Dizziness</li>
                   <li><i class="bi bi-dot text-primary fs-5 align-middle"></i> Left Hand Numbness</li>
-                </ul>
+                </ul> -->
+
+                 <textarea class="cc"></textarea>
               </section>
 
               <section class="mb-4">
@@ -157,11 +177,13 @@
               <section class="mb-4 mb-lg-0">
                 <h6 class="text-body-emphasis fw-bold border-bottom pb-2 mb-2">Advice</h6>
                 <ul class="list-unstyled small text-secondary mb-0">
-                  <li class="mb-1"><i class="bi bi-arrow-right-short text-primary"></i> Take medicine regularly.</li>
+                  <!-- <li class="mb-1"><i class="bi bi-arrow-right-short text-primary"></i> Take medicine regularly.</li>
                   <li class="mb-1"><i class="bi bi-arrow-right-short text-primary"></i> Drink plenty of water.</li>
                   <li class="mb-1"><i class="bi bi-arrow-right-short text-primary"></i> Adequate sleep.</li>
                   <li class="mb-1"><i class="bi bi-arrow-right-short text-primary"></i> Avoid stress.</li>
-                  <li><i class="bi bi-arrow-right-short text-primary"></i> Follow-up after 30 days.</li>
+                  <li><i class="bi bi-arrow-right-short text-primary"></i> Follow-up after 30 days.</li> -->
+
+                  <textarea class="advice"></textarea>
                 </ul>
               </section>
             </div>
@@ -180,7 +202,7 @@
                         <th style="width: 15%;" class="text-center py-2">Dose</th>
                         <th style="width: 15%;" class="text-center py-2">Duration</th>
                         <th style="width: 20%;" class="ps-3 py-2">Instruction</th>
-                        <th style="width: 15%;" class="text-center py-2 d-print-none">
+                        <th style="width: 15%;" class="text-center py-2 ">
                           <button class="btn btn-warning btn-xs text-dark btn_clear">Clear All</button>
                         </th>
                       </tr>
@@ -233,7 +255,8 @@
           <div class="row mt-5 pt-4 mx-0 px-4">
             <div class="col-sm-5 ms-auto text-center invoice-col">
               <div style="height:60px;">
-                <img src="assets/img/signature.png" class="img-fluid h-100" style="max-height:60px;" alt="Signature">
+                <!-- <img src="assets/img/signature.png" class="img-fluid h-100" style="max-height:60px;" alt="Signature"> -->
+                 <button class="btn btn-success btn_process">Process</button>
               </div>
               <hr class="my-2">
               <h5 class="fw-bold text-body-emphasis mb-1">Dr. Sirajee Shafiqul Islam</h5>
@@ -332,7 +355,7 @@ $(function(){
            </td>
            <!-- Added d-print-none explicitly on dynamic rows generation mapping -->
            <td class="text-center d-print-none">
-             <button onclick="deleteItem(${item.id})" class="btn btn-xs btn-outline-danger px-2 py-1">
+             <button data-id='${item.id}' class="btn btn-xs btn-outline-danger del px-2 py-1">
                <i class="bi bi-trash"></i> Remove
              </button>
            </td>
@@ -341,11 +364,58 @@ $(function(){
 
      $(".prescription_body").html(html);
   }
+
+
+   $("body").on("click", ".del", function(){
+     let itemId= $(this).data("id")
+      prescription.delItem(itemId);
+      printCart();
+   })
+
+   $(".btn_process").on("click", function(){
+       
+     let consultation_id= $(".consultation_id").val();
+     let doctor_id= $(".doctor_id").val();
+     let patient_id= $(".patient_id").val();
+     let additional_notes= $(".advice").val();
+     let cc= $(".cc").val();
+     let medicine= prescription.getData()
+
+     let data={
+      consultation_id,
+      doctor_id,
+      patient_id,
+      additional_notes,
+      cc,
+      medicine
+     }
+
+     console.log(data);
+
+     $.ajax({
+      url:"<?php echo $base_url?>/api/prescription/processprescription",
+      method:"post",
+      data:{  
+      consultation_id,
+      doctor_id,
+      patient_id,
+      additional_notes,
+      cc,
+      medicine},
+      success:function(res){
+        console.log(res);
+        
+      },
+      error: function(err){
+          console.log(err); 
+      }
+     });
+     
+
+   })
+
+
 });
 
-function deleteItem(id){
-  alert("Removing item ID: " + id);
-  // prescription.deleteItem(id);
-  // printCart();
-}
+
 </script>

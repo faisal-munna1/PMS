@@ -43,13 +43,13 @@ foreach($model_dirs as $dir){
 $folder="../api";
 $directories = glob($folder.'/*' , GLOB_ONLYDIR);
 foreach($directories as $dir){
-    foreach (glob("{$dir}/*_api.php") as $filename)
+    foreach (glob("{$dir}/*api.php") as $filename)
     {   
         include_once $filename;
     }
 }
 
-foreach (glob("{$folder}/*_api.php") as $filename)
+foreach (glob("{$folder}/*api.php") as $filename)
 {   
     include_once $filename;
 }

@@ -78,6 +78,8 @@ require_once("controllers/controller.php");
 <!-- Custom CSS -->
 <link rel="stylesheet"
       href="<?= $base_url ?>/asset/css/style.css">
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      <script src="<?= $base_url ?>/js/cart2.js"></script>
 
 </head>
 

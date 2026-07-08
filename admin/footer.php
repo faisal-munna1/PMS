@@ -20,7 +20,7 @@
 </div>
 
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 
 <!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
@@ -122,6 +122,10 @@
     });
 
     $('.select2').select2({
+        theme: 'bootstrap-5',
+        width: '100%'
+    });
+    $('select').select2({
         theme: 'bootstrap-5',
         width: '100%'
     });

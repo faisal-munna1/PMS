@@ -16,14 +16,14 @@ public static function html_select($name="cmbMedicines")
         global $db;
 
         $stmt = $db->query("
-            SELECT *
-            FROM medicines
+            SELECT medicines.id , medicines.medicine_name,medicine_generics.generic_name generic 
+            FROM medicines join  medicine_generics on  medicine_generics.id= medicines.generic_id
             ORDER BY id
         ");
 
        $html="<select name='$name' id='$name' class='form-select'>";
             while(  $row = $stmt->fetch_object()){
-                $html.=" <option value='$row->id'>$row->medicine_name</option>";
+                $html.=" <option value='$row->id'>$row->medicine_name | $row->generic </option>";
             }
 
         return $html.= "</select>";
