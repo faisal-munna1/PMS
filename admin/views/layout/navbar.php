@@ -15,7 +15,7 @@
             <li class="nav-item d-none d-md-block">
                 <a href="./index.html" class="nav-link">
                     <i class="bi bi-grid-1x2 me-1"></i>
-                    Live Preview
+                    Home
                 </a>
             </li>
 

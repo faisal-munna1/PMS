@@ -1,14 +1,9 @@
-drop database if exists pms;
-create database if not exists pms;
-use pms;
-
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2026 at 08:39 PM
+-- Generation Time: Jul 09, 2026 at 04:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -279,7 +274,56 @@ CREATE TABLE `medicines` (
 --
 
 INSERT INTO `medicines` (`id`, `medicine_name`, `generic_id`, `manufacturer_id`, `type_id`, `strength_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Napa', 1, 1, 1, 1, 'active', '2026-07-06 17:59:53', '2026-07-06 17:59:53');
+(1, 'Napa', 1, 2, 1, 33, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(2, 'Napa Extend', 1, 2, 1, 38, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(3, 'Ace', 1, 1, 1, 33, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(4, 'Ace XR', 1, 1, 1, 38, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(5, 'Reset', 1, 3, 1, 33, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(6, 'Ecosprin', 2, 4, 1, 23, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(7, 'Ecosprin Gold', 2, 4, 2, 23, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(8, 'Clopid', 3, 1, 1, 24, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(9, 'Clopilet', 3, 3, 1, 24, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(10, 'Plavix', 3, 15, 1, 24, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(11, 'Rosuva', 4, 1, 1, 15, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(12, 'Rosutin', 4, 3, 1, 15, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(13, 'Rostat', 4, 4, 1, 15, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(14, 'Atova', 5, 1, 1, 15, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(15, 'Atorva', 5, 3, 1, 15, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(16, 'Maxpro', 8, 4, 1, 18, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(17, 'Pantonix', 6, 1, 1, 18, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(18, 'PPI', 6, 2, 1, 18, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(19, 'Losectil', 9, 5, 2, 15, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(20, 'Rabeca', 7, 3, 1, 15, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(21, 'Nervalin', 10, 1, 2, 19, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(22, 'Pregaba', 10, 3, 2, 19, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(23, 'Pregalin', 10, 4, 2, 19, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(24, 'Neurogab', 11, 1, 2, 27, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(25, 'Gabastar', 11, 3, 2, 27, 'active', '2026-07-08 14:49:56', '2026-07-08 14:49:56'),
+(26, 'RivaXa', 55, 1, 1, 12, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(27, 'Kinexa', 55, 2, 1, 15, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(28, 'Roxarel', 55, 3, 1, 12, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(29, 'Roxolyte', 55, 4, 1, 12, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(30, 'Rivarox', 55, 5, 1, 12, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(31, 'Apixa', 56, 2, 1, 8, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(32, 'Pixorel', 56, 3, 1, 8, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(33, 'Antixa', 56, 12, 1, 8, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(34, 'Pixan', 56, 20, 1, 8, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(35, 'Apiban', 56, 22, 1, 8, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(36, 'Dabigat', 57, 3, 2, 24, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(37, 'Dabixa', 57, 2, 2, 24, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(38, 'Lovenox', 58, 4, 4, 27, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(39, 'Enoxa', 58, 3, 4, 27, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(40, 'Comet', 49, 1, 1, 33, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(41, 'Metfo', 49, 2, 1, 33, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(42, 'Empa', 51, 3, 1, 12, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(43, 'Empazin', 51, 4, 1, 12, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(44, 'Linita', 52, 1, 1, 8, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(45, 'Sitavia', 53, 3, 1, 24, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(46, 'Domin', 68, 2, 1, 12, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(47, 'Ondem', 69, 3, 1, 12, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(48, 'Lactu', 70, 1, 3, 47, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(49, 'D-Rise', 73, 4, 2, 26, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21'),
+(50, 'Calbo-D', 71, 1, 1, 24, 'active', '2026-07-08 14:53:21', '2026-07-08 14:53:21');
 
 -- --------------------------------------------------------
 
@@ -297,7 +341,26 @@ CREATE TABLE `medicine_doses` (
 --
 
 INSERT INTO `medicine_doses` (`id`, `dose_name`) VALUES
-(1, '3ml');
+(1, '1+0+0'),
+(2, '0+1+0'),
+(3, '0+0+1'),
+(4, '1+0+1'),
+(5, '1+1+0'),
+(6, '1+1+1'),
+(7, '1+1+1+1'),
+(8, '1/2+0+1/2'),
+(9, '1/2+0+0'),
+(10, '0+0+1/2'),
+(11, '2+0+2'),
+(12, '2+2+2'),
+(13, 'SOS'),
+(14, 'PRN'),
+(15, 'Stat'),
+(16, 'Alternate Day'),
+(17, 'Once Weekly'),
+(18, 'Twice Weekly'),
+(19, 'Loading Dose'),
+(20, 'As Directed');
 
 -- --------------------------------------------------------
 
@@ -315,7 +378,26 @@ CREATE TABLE `medicine_durations` (
 --
 
 INSERT INTO `medicine_durations` (`id`, `duration_name`) VALUES
-(1, '5 days');
+(1, '1 Day'),
+(2, '3 Days'),
+(3, '5 Days'),
+(4, '7 Days'),
+(5, '10 Days'),
+(6, '14 Days'),
+(7, '15 Days'),
+(8, '21 Days'),
+(9, '1 Month'),
+(10, '6 Weeks'),
+(11, '2 Months'),
+(12, '3 Months'),
+(13, '6 Months'),
+(14, '9 Months'),
+(15, '1 Year'),
+(16, 'Long Term'),
+(17, 'Continue'),
+(18, 'Until Follow-up'),
+(19, 'As Needed'),
+(20, 'Single Dose');
 
 -- --------------------------------------------------------
 
@@ -333,7 +415,26 @@ CREATE TABLE `medicine_frequencies` (
 --
 
 INSERT INTO `medicine_frequencies` (`id`, `frequency_name`) VALUES
-(1, '1+1+1');
+(1, 'OD'),
+(2, 'BD'),
+(3, 'TDS'),
+(4, 'QID'),
+(5, 'HS'),
+(6, 'Morning'),
+(7, 'Night'),
+(8, 'Before Meal'),
+(9, 'After Meal'),
+(10, 'With Food'),
+(11, 'Empty Stomach'),
+(12, 'Every 6 Hours'),
+(13, 'Every 8 Hours'),
+(14, 'Every 12 Hours'),
+(15, 'Weekly'),
+(16, 'Monthly'),
+(17, 'SOS'),
+(18, 'PRN'),
+(19, 'Immediately'),
+(20, 'As Directed');
 
 -- --------------------------------------------------------
 
@@ -354,7 +455,86 @@ CREATE TABLE `medicine_generics` (
 --
 
 INSERT INTO `medicine_generics` (`id`, `generic_name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'peracitamol', 'active', '2026-07-06 17:30:47', '2026-07-06 17:30:47');
+(1, 'Paracetamol', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(2, 'Aspirin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(3, 'Clopidogrel', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(4, 'Rosuvastatin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(5, 'Atorvastatin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(6, 'Pantoprazole', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(7, 'Rabeprazole', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(8, 'Esomeprazole', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(9, 'Omeprazole', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(10, 'Pregabalin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(11, 'Gabapentin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(12, 'Methylcobalamin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(13, 'Citicoline', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(14, 'Piracetam', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(15, 'Levetiracetam', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(16, 'Sodium Valproate', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(17, 'Carbamazepine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(18, 'Oxcarbazepine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(19, 'Lamotrigine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(20, 'Topiramate', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(21, 'Clonazepam', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(22, 'Diazepam', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(23, 'Alprazolam', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(24, 'Betahistine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(25, 'Cinnarizine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(26, 'Prochlorperazine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(27, 'Amitriptyline', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(28, 'Duloxetine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(29, 'Nortriptyline', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(30, 'Escitalopram', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(31, 'Sertraline', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(32, 'Fluoxetine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(33, 'Donepezil', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(34, 'Memantine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(35, 'Baclofen', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(36, 'Tizanidine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(37, 'Tolperisone', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(38, 'Amlodipine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(39, 'Telmisartan', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(40, 'Losartan', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(41, 'Bisoprolol', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(42, 'Metoprolol', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(43, 'Nebivolol', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(44, 'Perindopril', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(45, 'Ramipril', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(46, 'Hydrochlorothiazide', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(47, 'Furosemide', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(48, 'Spironolactone', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(49, 'Metformin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(50, 'Gliclazide', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(51, 'Empagliflozin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(52, 'Linagliptin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(53, 'Sitagliptin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(54, 'Insulin Human', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(55, 'Rivaroxaban', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(56, 'Apixaban', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(57, 'Dabigatran', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(58, 'Enoxaparin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(59, 'Cefixime', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(60, 'Cefuroxime', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(61, 'Ceftriaxone', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(62, 'Azithromycin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(63, 'Amoxicillin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(64, 'Amoxicillin + Clavulanic Acid', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(65, 'Metronidazole', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(66, 'Ciprofloxacin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(67, 'Levofloxacin', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(68, 'Domperidone', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(69, 'Ondansetron', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(70, 'Lactulose', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(71, 'Calcium Carbonate + Vitamin D3', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(72, 'Vitamin B Complex', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(73, 'Vitamin D3', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(74, 'Zinc Sulfate', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(75, 'Folic Acid', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(76, 'Ferrous Fumarate + Folic Acid', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(77, 'Thiamine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(78, 'Acetylcysteine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(79, 'Montelukast', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20'),
+(80, 'Levocetirizine', 'active', '2026-07-08 14:39:20', '2026-07-08 14:39:20');
 
 -- --------------------------------------------------------
 
@@ -372,8 +552,26 @@ CREATE TABLE `medicine_instructions` (
 --
 
 INSERT INTO `medicine_instructions` (`id`, `instruction_name`) VALUES
-(1, 'after meal'),
-(2, 'before meal');
+(1, 'After Meal'),
+(2, 'Before Meal'),
+(3, 'With Food'),
+(4, 'Empty Stomach'),
+(5, 'At Bedtime'),
+(6, 'Swallow Whole'),
+(7, 'Do Not Crush'),
+(8, 'Drink Plenty of Water'),
+(9, 'Complete Full Course'),
+(10, 'Shake Well Before Use'),
+(11, 'External Use Only'),
+(12, 'Eye Use Only'),
+(13, 'Ear Use Only'),
+(14, 'Use As Directed'),
+(15, 'Avoid Alcohol'),
+(16, 'Avoid Driving'),
+(17, 'Monitor Blood Pressure'),
+(18, 'Monitor Blood Sugar'),
+(19, 'Take With Milk'),
+(20, 'Take With Plenty of Water');
 
 -- --------------------------------------------------------
 
@@ -394,7 +592,36 @@ CREATE TABLE `medicine_manufacturers` (
 --
 
 INSERT INTO `medicine_manufacturers` (`id`, `manufacturer_name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'popular', 'active', '2026-07-06 17:30:58', '2026-07-06 17:30:58');
+(1, 'Square Pharmaceuticals PLC', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(2, 'Beximco Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(3, 'Incepta Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(4, 'Renata PLC', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(5, 'Eskayef Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(6, 'Healthcare Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(7, 'ACI Limited', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(8, 'Opsonin Pharma Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(9, 'Drug International Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(10, 'Aristopharma Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(11, 'Popular Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(12, 'General Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(13, 'The ACME Laboratories Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(14, 'Beacon Pharmaceuticals PLC', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(15, 'Radiant Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(16, 'Orion Pharma Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(17, 'IBN SINA Pharmaceutical Industry Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(18, 'Unimed Unihealth Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(19, 'Biopharma Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(20, 'Globe Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(21, 'Navana Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(22, 'NIPRO JMI Pharma Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(23, 'Novo Healthcare Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(24, 'Delta Pharma Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(25, 'Pacific Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(26, 'Team Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(27, 'White Horse Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(28, 'Ziska Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(29, 'Amico Laboratories Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28'),
+(30, 'Benham Pharmaceuticals Ltd', 'active', '2026-07-08 14:37:28', '2026-07-08 14:37:28');
 
 -- --------------------------------------------------------
 
@@ -415,7 +642,55 @@ CREATE TABLE `medicine_strengths` (
 --
 
 INSERT INTO `medicine_strengths` (`id`, `strength_name`, `status`, `created_at`, `updated_at`) VALUES
-(1, '500mg', 'active', '2026-07-06 17:48:22', '2026-07-06 17:48:22');
+(1, '0.25 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(2, '0.5 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(3, '1 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(4, '2 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(5, '2.5 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(6, '3 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(7, '4 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(8, '5 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(9, '6 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(10, '7.5 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(11, '8 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(12, '10 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(13, '12.5 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(14, '16 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(15, '20 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(16, '25 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(17, '30 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(18, '40 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(19, '50 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(20, '60 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(21, '75 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(22, '80 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(23, '81 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(24, '100 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(25, '120 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(26, '150 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(27, '200 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(28, '250 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(29, '300 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(30, '325 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(31, '400 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(32, '450 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(33, '500 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(34, '550 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(35, '600 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(36, '750 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(37, '800 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(38, '1000 mg', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(39, '1.5 gm', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(40, '2 gm', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(41, '5 ml', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(42, '10 ml', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(43, '15 ml', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(44, '20 ml', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(45, '30 ml', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(46, '50 ml', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(47, '100 ml', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(48, '200 ml', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53'),
+(49, '250 ml', 'active', '2026-07-08 14:37:53', '2026-07-08 14:37:53');
 
 -- --------------------------------------------------------
 
@@ -436,7 +711,25 @@ CREATE TABLE `medicine_types` (
 --
 
 INSERT INTO `medicine_types` (`id`, `type_name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Syrup', 'active', '2026-07-06 17:31:20', '2026-07-06 17:31:20');
+(1, 'Tablet', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(2, 'Capsule', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(3, 'Syrup', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(4, 'Injection', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(5, 'Suspension', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(6, 'Oral Solution', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(7, 'Drops', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(8, 'Eye Drop', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(9, 'Ear Drop', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(10, 'Nasal Spray', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(11, 'Inhaler', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(12, 'Respule', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(13, 'Cream', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(14, 'Ointment', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(15, 'Gel', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(16, 'Lotion', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(17, 'Powder', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(18, 'Sachet', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03'),
+(19, 'Suppository', 'active', '2026-07-08 14:38:03', '2026-07-08 14:38:03');
 
 -- --------------------------------------------------------
 
@@ -509,6 +802,16 @@ CREATE TABLE `prescriptions` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `prescriptions`
+--
+
+INSERT INTO `prescriptions` (`id`, `consultation_id`, `patient_id`, `doctor_id`, `prescription_date`, `additional_notes`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 0, 0, 0, '2026-07-08', NULL, NULL, '2026-07-08 13:29:57', '2026-07-08 13:29:57'),
+(2, 0, 0, 0, '2026-07-08', NULL, NULL, '2026-07-08 13:29:57', '2026-07-08 13:29:57'),
+(3, 1, 1, 1, '2026-07-08', NULL, NULL, '2026-07-08 13:40:47', '2026-07-08 13:40:47'),
+(4, 1, 1, 1, '2026-07-08', NULL, NULL, '2026-07-08 16:20:34', '2026-07-08 16:20:34');
+
 -- --------------------------------------------------------
 
 --
@@ -528,6 +831,17 @@ CREATE TABLE `prescription_medicines` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `prescription_medicines`
+--
+
+INSERT INTO `prescription_medicines` (`id`, `prescription_id`, `medicine_id`, `dose_id`, `frequency_id`, `duration_id`, `instruction_id`, `remarks`, `sort_order`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 0, 1, 1, '', 0, '2026-07-08 13:29:57', '2026-07-08 13:29:57'),
+(2, 2, 1, 1, 0, 1, 1, '', 0, '2026-07-08 13:29:57', '2026-07-08 13:29:57'),
+(3, 3, 1, 1, 0, 1, 0, '', 0, '2026-07-08 13:40:47', '2026-07-08 13:40:47'),
+(4, 4, 1, 1, 0, 1, 0, '', 0, '2026-07-08 16:20:34', '2026-07-08 16:20:34'),
+(5, 4, 3, 7, 0, 4, 0, '', 0, '2026-07-08 16:20:34', '2026-07-08 16:20:34');
 
 -- --------------------------------------------------------
 
@@ -606,7 +920,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role_id`, `username`, `password`, `name`, `email`, `phone`, `image`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 1, 'admin', '$2y$10$hhZNHZ3jASkA3aRgJHaqBO98U4T3QNjJ4igsgz2Toe4C0LJt2mpJO', 'Faisal Munna', 'admin@gmail.com', '01750086600', 'faisal-munna-1783347298.jpg', 'active', NULL, '2026-07-06 11:10:43', '2026-07-06 15:52:56'),
-(2, 3, 'doctor', '$2y$10$WPOnIFc1MQac9CEZuowVV.cie0hAcZXvOrR7YR04dK3MEIt/5h.8S', 'Dr. Sirajee Shafiqul Islam', 'sirajee@gmail.com', '017500', 'dr-sirajee-shafiqul-islam-1783350534.jpg', 'active', NULL, '2026-07-06 11:13:23', '2026-07-06 15:08:54'),
+(2, 3, 'doctor', '$2y$10$WPOnIFc1MQac9CEZuowVV.cie0hAcZXvOrR7YR04dK3MEIt/5h.8S', 'Dr. Sirajee Shafiqul Islam', 'sirajee@gmail.com', '017500', 'dr-sirajee-shafiqul-islam-1783524183.jpg', 'active', NULL, '2026-07-06 11:13:23', '2026-07-08 15:23:03'),
 (3, 2, 'assistant', '$2y$10$m4MZY/yi7mdlYJ4LwS5Y/uyg6MAQGyL8gkb8HBNV243Pnjb3tBFpS', 'Shajjad Patwary', 'shajjad@gmail.com', '017500', 'shajjad-patwary-1783347271.jpg', 'active', NULL, '2026-07-06 11:15:02', '2026-07-06 14:14:31'),
 (4, 3, 'mahmud', '$2y$10$stio3qGLhaQAHskOHyFOF.x/l17qQsv3byJ/vK6m384ymDeRJHmri', 'Md. Mahmud Hasan', 'mahmud@gmail.com', '01750000000', 'madud-hhhhhhhh-1783347323.jpg', 'active', NULL, '2026-07-06 12:15:01', '2026-07-06 15:12:29');
 
@@ -844,55 +1158,55 @@ ALTER TABLE `lab_results`
 -- AUTO_INCREMENT for table `medicines`
 --
 ALTER TABLE `medicines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `medicine_doses`
 --
 ALTER TABLE `medicine_doses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `medicine_durations`
 --
 ALTER TABLE `medicine_durations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `medicine_frequencies`
 --
 ALTER TABLE `medicine_frequencies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `medicine_generics`
 --
 ALTER TABLE `medicine_generics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `medicine_instructions`
 --
 ALTER TABLE `medicine_instructions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `medicine_manufacturers`
 --
 ALTER TABLE `medicine_manufacturers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `medicine_strengths`
 --
 ALTER TABLE `medicine_strengths`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `medicine_types`
 --
 ALTER TABLE `medicine_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `patients`
@@ -910,13 +1224,13 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `prescriptions`
 --
 ALTER TABLE `prescriptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `prescription_medicines`
 --
 ALTER TABLE `prescription_medicines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `role`

@@ -6,62 +6,116 @@ class Menu
     {
         global $base_url;
 
-        $menu["name"]  = $menu["name"] ?? "";
-        $menu["icon"]  = $menu["icon"] ?? "bi bi-circle";
-        $menu["route"] = $menu["route"] ?? "#";
+        $name  = $menu["name"] ?? "";
+        $icon  = $menu["icon"] ?? "bi bi-circle";
+        $route = $menu["route"] ?? "#";
 
-        $hasChild = isset($menu["links"]) && !empty($menu["links"]);
+        $links = $menu["links"] ?? [];
 
-        // Parent menu URL
+        $hasChild = !empty($links);
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Parent URL
+        |--------------------------------------------------------------------------
+        */
+
+        $url = $hasChild 
+            ? "#" 
+            : $base_url . "/" . ltrim($route, "/");
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Menu Item
+        |--------------------------------------------------------------------------
+        */
+
+        $html = '
+        <li class="nav-item">';
+
+
+        $html .= '
+            <a href="'.$url.'" class="nav-link">
+
+                <i class="nav-icon '.$icon.'"></i>
+
+                <p>
+                    '.$name;
+
         if ($hasChild) {
-            $url = "#";
-        } else {
-            $url = $base_url . "/" . ltrim($menu["route"], "/");
+
+            $html .= '
+                    <i class="nav-arrow bi bi-chevron-right"></i>';
+
         }
 
-        $html = '<li class="nav-item">';
 
-        $html .= '<a href="' . $url . '" class="nav-link">';
+        $html .= '
+                </p>
 
-        $html .= '<i class="nav-icon ' . $menu["icon"] . '"></i>';
+            </a>';
 
-        $html .= '<p>';
 
-        $html .= $menu["name"];
 
-        if ($hasChild) {
-            $html .= '<i class="nav-arrow bi bi-chevron-right"></i>';
-        }
-
-        $html .= '</p>';
-
-        $html .= '</a>';
+        /*
+        |--------------------------------------------------------------------------
+        | Child Menu
+        |--------------------------------------------------------------------------
+        */
 
         if ($hasChild) {
 
-            $html .= '<ul class="nav nav-treeview">';
 
-            foreach ($menu["links"] as $link) {
+            $html .= '
+            <ul class="nav nav-treeview">';
 
-                $icon = $link["icon"] ?? "bi bi-circle";
 
-                $html .= '<li class="nav-item">';
+            foreach ($links as $link) {
 
-                $html .= '<a href="' . $base_url . '/' . ltrim($link["route"], "/") . '" class="nav-link">';
 
-                $html .= '<i class="nav-icon ' . $icon . '"></i>';
+                $childIcon = $link["icon"] ?? "bi bi-circle";
 
-                $html .= '<p>' . $link["text"] . '</p>';
+                $childRoute = $link["route"] ?? "#";
 
-                $html .= '</a>';
+                $childText = $link["text"] ?? "";
 
-                $html .= '</li>';
+
+                $html .= '
+
+                <li class="nav-item">
+
+                    <a href="'.$base_url.'/'.ltrim($childRoute,"/").'" 
+                       class="nav-link">
+
+
+                        <i class="nav-icon '.$childIcon.'"></i>
+
+
+                        <p>
+                            '.$childText.'
+                        </p>
+
+
+                    </a>
+
+                </li>';
+
             }
 
-            $html .= '</ul>';
+
+            $html .= '
+            </ul>';
+
         }
 
-        $html .= '</li>';
+
+        $html .= '
+        </li>';
+
+
 
         return $html;
     }

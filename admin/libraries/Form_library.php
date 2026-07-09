@@ -1,4 +1,20 @@
+
 <?php
+
+/**
+ * Form Helper Library
+ * Version: 2.0
+ * Framework: Custom MVC
+ * UI: AdminLTE 4 + Bootstrap 5
+ *
+ * Features:
+ * - Dynamic form generation
+ * - Bootstrap 5 compatible markup
+ * - Secure HTML escaping
+ * - Reusable input/select/textarea/button components
+ * - File upload preview support
+ * - MVC friendly routing
+ */
 class Form
 {
   public static function open($config = [])

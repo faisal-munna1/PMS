@@ -84,7 +84,7 @@ if (isset($_POST["btnSignIn"])) {
     <div class="card card-outline card-primary">
       <div class="card-header text-center pt-4 border-0">
         <a href="#" class="link-body-emphasis text-decoration-none">
-          <img src="asset/dist/img/faisal_logo.png" alt="Logo" class="img-fluid" width="300">
+          <img src="<?= $base_url ?>/asset/images/faisal_logo.png" alt="Logo" class="img-fluid" width="300">
         </a>
         <p class="text-secondary small mt-2 mb-0">Patient Management System</p>
 

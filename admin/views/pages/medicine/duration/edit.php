@@ -1,46 +1,84 @@
-<div class="col-md-6 m-auto mt-md-5">
-    <div class="card card-primary card-outline mb-4">
-        <div class="card-header">
-            <div class="card-title w-100">
-                Update Medicine Duration
-                <a href="<?= $base_url ?>/duration/index" class="btn btn-sm btn-primary float-end">
-                    Show Table
-                </a>
+<div class="row justify-content-center">
+
+    <div class="col-lg-6">
+
+        <div class="card card-outline card-primary shadow-sm">
+
+            <div class="card-header">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <h3 class="card-title">
+                        Update Medicine Duration
+                    </h3>
+
+                    <a href="<?= $base_url ?>/duration/index"
+                       class="btn btn-primary btn-sm">
+
+                        <i class="bi bi-table me-1"></i>
+                        Show Table
+
+                    </a>
+
+                </div>
+
             </div>
-        </div>
 
-        <form method="post" action="<?= $base_url ?>/duration/update">
-
-            <div class="card-body">
+            <form action="<?= $base_url ?>/duration/update"
+                  method="post">
 
                 <input
                     type="hidden"
                     name="id"
                     value="<?= $data->id ?? '' ?>">
 
-                <div class="mb-3">
-                    <label for="duration_name" class="form-label">Duration Name</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="duration_name"
-                        name="duration_name"
-                        value="<?= $data->duration_name ?? '' ?>"
-                        required>
+                <div class="card-body">
+
+                    <div class="mb-3">
+
+                        <label for="duration_name" class="form-label">
+                            Duration Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="duration_name"
+                            name="duration_name"
+                            class="form-control"
+                            value="<?= htmlspecialchars($data->duration_name ?? '') ?>"
+                            placeholder="Enter Duration Name"
+                            autocomplete="off"
+                            required>
+
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="card-footer">
 
-            <div class="card-footer">
-                <button type="submit" name="btn_submit" class="btn btn-primary">
-                    Update Duration
-                </button>
+                    <button type="submit"
+                            name="btn_submit"
+                            class="btn btn-primary">
 
-                <a href="<?= $base_url ?>/duration/index" class="btn btn-secondary">
-                    Cancel
-                </a>
-            </div>
+                        <i class="bi bi-check-circle me-1"></i>
+                        Update Duration
 
-        </form>
+                    </button>
+
+                    <a href="<?= $base_url ?>/duration/index"
+                       class="btn btn-outline-secondary">
+
+                        <i class="bi bi-arrow-left me-1"></i>
+                        Back
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
+
 </div>

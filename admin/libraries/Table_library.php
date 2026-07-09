@@ -1,108 +1,371 @@
 <?php
 
+class Table
+{
 
-class Table{
+    public static function report($table, $columns = ["*"])
+    {
+        global $db, $tx;
 
-   public static function report($table,$columns=["*"]){
-        global $db,$tx;       
-       $cols="*";
-       if(is_array($columns)>0){
-         $cols=implode(",",$columns);
-       }
-       
-       $sql="select $cols from {$tx}$table";
-       $result=$db->query($sql);
-       $fields = $result->fetch_fields();
-    
-        $html="<table class='table table-striped'>";  
-        $html.="<thead>"; 
-        $html.="<tr>"; 
-        foreach($fields as $field){     
-            $html.="<th>";
-            $html.=ucfirst($field->name);
-            $html.="</th>";
+
+        $cols = self::columns($columns);
+
+
+        $sql = "
+            SELECT {$cols}
+            FROM {$tx}{$table}
+        ";
+
+
+        $result = $db->query($sql);
+
+
+        if (!$result || $result->num_rows == 0) {
+
+            return self::emptyTable();
+
         }
-        $html.="</tr>";
-        $html.="</thead>"; 
-        $html.="<tbody>"; 
-        while($row=$result->fetch_assoc()){
-         $html.="<tr>";
-        
-            foreach($fields as $field){     
-                $html.="<td>";
-                $html.=$row["$field->name"];
-                $html.="</td>";
+
+
+        $fields = $result->fetch_fields();
+
+
+
+        $html = '
+
+        <div class="table-responsive">
+
+        <table class="table table-bordered table-hover table-striped align-middle">
+
+            <thead class="table-light">
+
+                <tr>';
+
+
+        foreach ($fields as $field) {
+
+            $html .= '
+                <th>
+                    '.ucfirst($field->name).'
+                </th>';
+
+        }
+
+
+
+        $html .= '
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>';
+
+
+
+        while ($row = $result->fetch_assoc()) {
+
+
+            $html .= '<tr>';
+
+
+            foreach ($fields as $field) {
+
+
+                $value = $row[$field->name] ?? "";
+
+
+                $html .= '
+
+                <td>
+                    '.htmlspecialchars($value).'
+                </td>';
+
             }
-         $html.="</tr>";
+
+
+            $html .= '</tr>';
+
         }
-        $html.="</tbody>"; 
-        $html.="</table>";
-    
+
+
+
+        $html .= '
+
+            </tbody>
+
+        </table>
+
+        </div>';
+
+
+
         return $html;
+
     }
 
-    public static function manage($table,$columns=["*"],$route=""){
-        global $db,$tx;        
-        if($route=="")$route=$_SERVER["REQUEST_URI"];
-        
-       $cols="*";
-       if(is_array($columns)>0){
-         $cols=implode(",",$columns);
-       }
-       
-       $sql="select $cols from {$tx}$table";
-       $result=$db->query($sql);
-       $fields = $result->fetch_fields();
-    
-        $html="<table class='table table-striped'>";  
-        $html.="<thead>"; 
-        $html.="<tr>"; 
-        foreach($fields as $field){     
-            $html.="<th>";
-            $html.=ucfirst($field->name);
-            $html.="</th>";
+
+
+
+
+
+
+    public static function manage($table, $columns = ["*"], $route = "")
+    {
+
+        global $db, $tx;
+
+
+        if ($route == "") {
+
+            $route = $_SERVER["REQUEST_URI"];
+
         }
-            $html.="<th style='text-align:right'>";
-            $html.="Action";
-            $html.="</th>";
-        $html.="</tr>";
-        $html.="</thead>"; 
-        $html.="<tbody>"; 
-        while($row=$result->fetch_assoc()){
-         $html.="<tr>";         
-             foreach($fields as $field){     
-                 $html.="<td>";
-                
-                 if($field=="photo" || $field=="image"){
-                    $html.="<img src='img/".$row["$field->name"]."' style='position:absolute; height:100%' />";
+
+
+
+        $cols = self::columns($columns);
+
+
+
+        $sql = "
+            SELECT {$cols}
+            FROM {$tx}{$table}
+        ";
+
+
+
+        $result = $db->query($sql);
+
+
+
+        if (!$result || $result->num_rows == 0) {
+
+            return self::emptyTable();
+
+        }
+
+
+
+        $fields = $result->fetch_fields();
+
+
+
+
+        $html = '
+
+        <div class="table-responsive">
+
+        <table class="table table-bordered table-hover table-striped align-middle">
+
+
+        <thead class="table-dark">
+
+
+        <tr>';
+
+
+
+
+        foreach ($fields as $field) {
+
+
+            $html .= '
+
+            <th>
+                '.ucfirst($field->name).'
+            </th>';
+
+        }
+
+
+
+        $html .= '
+
+            <th width="150" class="text-center">
+                Action
+            </th>
+
+
+        </tr>
+
+
+        </thead>
+
+
+        <tbody>';
+
+
+
+
+
+        while ($row = $result->fetch_assoc()) {
+
+
+
+            $html .= '<tr>';
+
+
+
+            foreach ($fields as $field) {
+
+
+                $name = $field->name;
+
+                $value = $row[$name] ?? "";
+
+
+
+                if(
+                    strtolower($name) == "image" ||
+                    strtolower($name) == "photo"
+                ){
+
+
+                    $html .= '
+
+                    <td>
+
+                    <img src="'.$value.'"
+                    width="60"
+                    height="60"
+                    class="img-thumbnail">
+
+                    </td>';
+
+
+
                 }else{
-                    $html.=$row["$field->name"]; 
-                }
-                               
-                 $html.="</td>";
-             }
 
-             $html.="<td style='text-align:right'>";
-             $html.="<div class='btn-group'>";
-                 $html.="<a class='btn btn-primary' href='$route/edit/{$row["id"]}'>
-                 <i class='fas fa-edit'></i>
-                 </a>";
-                 $html.="<a class='btn btn-info' href='$route/{$row["id"]}'><i class='fas fa-eye'></i></a>";
-                 $html.="<a class='btn btn-danger' href='$route/delete/{$row["id"]}'><i class='fas fa-trash-alt'></i></a>";
-             $html.="</div>";            
-         $html.="</td>";            
-         
-         $html.="</tr>";
+
+                    $html .= '
+
+                    <td>
+                        '.htmlspecialchars($value).'
+                    </td>';
+
+                }
+
+
+
+            }
+
+
+
+
+            $id = $row["id"];
+
+
+
+            $html .= '
+
+            <td class="text-center">
+
+
+            <div class="btn-group btn-group-sm">
+
+
+                <a href="'.$route.'/edit/'.$id.'"
+                   class="btn btn-primary">
+
+                    <i class="bi bi-pencil"></i>
+
+                </a>
+
+
+
+                <a href="'.$route.'/'.$id.'"
+                   class="btn btn-info">
+
+                    <i class="bi bi-eye"></i>
+
+                </a>
+
+
+
+                <a href="'.$route.'/delete/'.$id.'"
+                   class="btn btn-danger"
+                   onclick="return confirm(\'Are you sure?\')">
+
+                    <i class="bi bi-trash"></i>
+
+                </a>
+
+
+            </div>
+
+
+            </td>';
+
+
+
+            $html .= '</tr>';
+
         }
-        $html.="</tbody>"; 
-        $html.="</table>";
-    
+
+
+
+
+
+        $html .= '
+
+        </tbody>
+
+        </table>
+
+        </div>';
+
+
+
         return $html;
+
     }
 
 
-    
-  
+
+
+
+
+
+    private static function columns($columns)
+    {
+
+        if(
+            is_array($columns) &&
+            count($columns) > 0 &&
+            $columns[0] != "*"
+        ){
+
+            return implode(",", $columns);
+
+        }
+
+
+        return "*";
+
+    }
+
+
+
+
+
+
+    private static function emptyTable()
+    {
+
+        return '
+
+        <div class="alert alert-info">
+
+            No Data Found.
+
+        </div>';
+
+    }
+
+
+
 }
 
 ?>

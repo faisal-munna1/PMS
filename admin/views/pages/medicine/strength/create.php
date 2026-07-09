@@ -1,52 +1,103 @@
-<div class="col-md-6 m-auto mt-md-5">
-    <div class="card card-primary card-outline mb-4">
+<div class="row justify-content-center">
 
-        <div class="card-header">
-            <div class="card-title w-100">
-                Add Medicine Strength
-                <a href="<?= $base_url ?>/strength/index" class="btn btn-sm btn-primary float-end">
-                    Show Table
-                </a>
+    <div class="col-lg-6">
+
+        <div class="card card-outline card-primary shadow-sm">
+
+            <div class="card-header">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <h3 class="card-title mb-0">
+                        Add Medicine Strength
+                    </h3>
+
+                    <a href="<?= $base_url ?>/strength/index"
+                       class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-table me-1"></i>
+                        Strength List
+                    </a>
+
+                </div>
+
             </div>
+
+            <form action="<?= $base_url ?>/strength/save" method="post">
+
+                <div class="card-body">
+
+                    <div class="row g-3">
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                Strength Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="strength_name"
+                                class="form-control"
+                                placeholder="Enter strength name"
+                                required>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                Status
+                            </label>
+
+                            <select
+                                name="status"
+                                class="form-select"
+                                required>
+
+                                <option value="">
+                                    Select Status
+                                </option>
+
+                                <option value="active">
+                                    Active
+                                </option>
+
+                                <option value="inactive">
+                                    Inactive
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+
+                    <a href="<?= $base_url ?>/strength/index"
+                       class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-1"></i>
+                        Back
+                    </a>
+
+                    <button
+                        type="submit"
+                        name="btn_submit"
+                        class="btn btn-primary">
+
+                        <i class="bi bi-check-circle me-1"></i>
+                        Save Strength
+
+                    </button>
+
+                </div>
+
+            </form>
+
         </div>
 
-        <form method="post" action="<?= $base_url ?>/strength/save">
-
-            <div class="card-body">
-
-                <div class="mb-3">
-                    <label for="strength_name" class="form-label">Strength Name</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="strength_name"
-                        name="strength_name"
-                        placeholder="Enter Strength Name"
-                        required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="status" class="form-label">Status</label>
-                    <select class="form-select" id="status" name="status" required>
-                        <option value="">Select Status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </select>
-                </div>
-
-            </div>
-
-            <div class="card-footer">
-                <button type="submit" name="btn_submit" class="btn btn-primary">
-                    Save Strength
-                </button>
-
-                <a href="<?= $base_url ?>/strength/index" class="btn btn-secondary">
-                    Cancel
-                </a>
-            </div>
-
-        </form>
-
     </div>
+
 </div>

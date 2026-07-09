@@ -1,49 +1,171 @@
+<?php
 
-<?php 
+class NumberToWord
+{
 
-Class NumberToWord{
-
-   static function numberToWord($num = false)
+    public static function convert($number = 0)
     {
-        $num = str_replace(array(',', ' '), '' , trim($num));
-        if(! $num) {
-            return false;
+
+        $number = trim(str_replace([",", " "], "", $number));
+
+
+        if ($number === "" || !is_numeric($number)) {
+
+            return "";
+
         }
-        $num = (int) $num;
-        $words = array();
-        $list1 = array('', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven',
-            'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
-        );
-        $list2 = array('', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety', 'hundred');
-        $list3 = array('', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion', 'septillion',
-            'octillion', 'nonillion', 'decillion', 'undecillion', 'duodecillion', 'tredecillion', 'quattuordecillion',
-            'quindecillion', 'sexdecillion', 'septendecillion', 'octodecillion', 'novemdecillion', 'vigintillion'
-        );
-        $num_length = strlen($num);
-        $levels = (int) (($num_length + 2) / 3);
-        $max_length = $levels * 3;
-        $num = substr('00' . $num, -$max_length);
-        $num_levels = str_split($num, 3);
-        for ($i = 0; $i < count($num_levels); $i++) {
-            $levels--;
-            $hundreds = (int) ($num_levels[$i] / 100);
-            $hundreds = ($hundreds ? ' ' . $list1[$hundreds] . ' hundred' . ' ' : '');
-            $tens = (int) ($num_levels[$i] % 100);
-            $singles = '';
-            if ( $tens < 20 ) {
-                $tens = ($tens ? ' ' . $list1[$tens] . ' ' : '' );
-            } else {
-                $tens = (int)($tens / 10);
-                $tens = ' ' . $list2[$tens] . ' ';
-                $singles = (int) ($num_levels[$i] % 10);
-                $singles = ' ' . $list1[$singles] . ' ';
+
+
+        $number = (int)$number;
+
+
+        if ($number == 0) {
+
+            return "zero";
+
+        }
+
+
+
+        $ones = [
+
+            "",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten",
+            "eleven",
+            "twelve",
+            "thirteen",
+            "fourteen",
+            "fifteen",
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "nineteen"
+
+        ];
+
+
+
+        $tens = [
+
+            "",
+            "",
+            "twenty",
+            "thirty",
+            "forty",
+            "fifty",
+            "sixty",
+            "seventy",
+            "eighty",
+            "ninety"
+
+        ];
+
+
+
+        $units = [
+
+            "",
+            "thousand",
+            "million",
+            "billion",
+            "trillion"
+
+        ];
+
+
+
+
+        $convertGroup = function($num) use ($ones,$tens)
+        {
+
+            $word = "";
+
+
+            if($num >= 100)
+            {
+
+                $word .= $ones[(int)($num / 100)] . " hundred ";
+
+                $num %= 100;
+
             }
-            $words[] = $hundreds . $tens . $singles . ( ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . $list3[$levels] . ' ' : '' );
-        } //end for loop
-        $commas = count($words);
-        if ($commas > 1) {
-            $commas = $commas - 1;
+
+
+            if($num >= 20)
+            {
+
+                $word .= $tens[(int)($num / 10)] . " ";
+
+                $num %= 10;
+
+            }
+
+
+            if($num > 0)
+            {
+
+                $word .= $ones[$num] . " ";
+
+            }
+
+
+            return trim($word);
+
+        };
+
+
+
+
+        $words = [];
+
+        $level = 0;
+
+
+
+        while($number > 0)
+        {
+
+            $group = $number % 1000;
+
+
+            if($group != 0)
+            {
+
+                $word = $convertGroup($group);
+
+
+                if(isset($units[$level]) && $units[$level] != "")
+                {
+
+                    $word .= " ".$units[$level];
+
+                }
+
+
+                array_unshift($words,$word);
+
+            }
+
+
+            $number = floor($number / 1000);
+
+            $level++;
+
         }
-        return implode(' ', $words);
+
+
+
+        return implode(" ",$words);
+
     }
+
 }

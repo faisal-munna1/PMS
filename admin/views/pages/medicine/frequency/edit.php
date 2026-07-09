@@ -1,47 +1,81 @@
-<div class="col-md-6 m-auto mt-md-5">
-    <div class="card card-primary card-outline mb-4">
-        <div class="card-header">
-            <div class="card-title w-100">
-                Update Medicine Frequency
-                <a href="<?= $base_url ?>/frequency/index" class="btn btn-sm btn-primary float-end">
-                    Show Table
-                </a>
-            </div>
-        </div>
+<div class="row justify-content-center">
 
-        <form method="post" action="<?= $base_url ?>/frequency/update">
+    <div class="col-lg-6">
 
-            <div class="card-body">
+        <div class="card card-outline card-primary shadow-sm">
 
-                <input
-                    type="hidden"
-                    name="id"
-                    value="<?= $data->id ?? '' ?>">
+            <div class="card-header">
 
-                <div class="mb-3">
-                    <label for="frequency_name" class="form-label">Frequency Name</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="frequency_name"
-                        name="frequency_name"
-                        value="<?= htmlspecialchars($data->frequency_name ?? '') ?>"
-                        placeholder="Enter Frequency Name"
-                        required>
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <h3 class="card-title">
+                        Update Medicine Frequency
+                    </h3>
+
+                    <a href="<?= $base_url ?>/frequency/index"
+                       class="btn btn-primary btn-sm">
+                        <i class="bi bi-table me-1"></i>
+                        Show Table
+                    </a>
+
                 </div>
 
             </div>
 
-            <div class="card-footer">
-                <button type="submit" name="btn_submit" class="btn btn-primary">
-                    Update Frequency
-                </button>
+            <form action="<?= $base_url ?>/frequency/update"
+                  method="post">
 
-                <a href="<?= $base_url ?>/frequency/index" class="btn btn-secondary">
-                    Cancel
-                </a>
-            </div>
+                <input type="hidden"
+                       name="id"
+                       value="<?= $data->id ?? '' ?>">
 
-        </form>
+                <div class="card-body">
+
+                    <div class="mb-3">
+
+                        <label for="frequency_name" class="form-label">
+                            Frequency Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="frequency_name"
+                            name="frequency_name"
+                            class="form-control"
+                            value="<?= htmlspecialchars($data->frequency_name ?? '') ?>"
+                            placeholder="Enter Frequency Name"
+                            autocomplete="off"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+
+                    <button type="submit"
+                            name="btn_submit"
+                            class="btn btn-primary">
+
+                        <i class="bi bi-check-circle me-1"></i>
+                        Update Frequency
+
+                    </button>
+
+                    <a href="<?= $base_url ?>/frequency/index"
+                       class="btn btn-outline-secondary">
+
+                        <i class="bi bi-arrow-left me-1"></i>
+                        Back
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
+
 </div>

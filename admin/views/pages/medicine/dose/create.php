@@ -1,41 +1,76 @@
-<div class="col-md-6 m-auto mt-md-5">
-    <div class="card card-primary card-outline mb-4">
-        <div class="card-header">
-            <div class="card-title w-100">
-                Add Medicine Dose
-                <a href="<?= $base_url ?>/dose/index" class="btn btn-sm btn-primary float-end">
-                    Show Table
-                </a>
-            </div>
-        </div>
+<div class="row justify-content-center">
 
-        <form method="post" action="<?= $base_url ?>/dose/save">
+    <div class="col-lg-6">
 
-            <div class="card-body">
+        <div class="card card-outline card-primary shadow-sm">
 
-                <div class="mb-3">
-                    <label for="dose_name" class="form-label">Dose Name</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="dose_name"
-                        name="dose_name"
-                        placeholder="Enter Dose Name"
-                        required>
+            <div class="card-header">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <h3 class="card-title mb-0">
+                        Add Medicine Dose
+                    </h3>
+
+                    <a href="<?= $base_url ?>/dose/index"
+                       class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-table me-1"></i>
+                        Dose List
+                    </a>
+
                 </div>
 
             </div>
 
-            <div class="card-footer">
-                <button type="submit" name="btn_submit" class="btn btn-primary">
-                    Save Dose
-                </button>
+            <form action="<?= $base_url ?>/dose/save" method="post">
 
-                <a href="<?= $base_url ?>/dose/index" class="btn btn-secondary">
-                    Cancel
-                </a>
-            </div>
+                <div class="card-body">
 
-        </form>
+                    <div class="row g-3">
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                Dose Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="dose_name"
+                                class="form-control"
+                                placeholder="Enter dose name"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+
+                    <a href="<?= $base_url ?>/dose/index"
+                       class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-1"></i>
+                        Back
+                    </a>
+
+                    <button
+                        type="submit"
+                        name="btn_submit"
+                        class="btn btn-primary">
+
+                        <i class="bi bi-check-circle me-1"></i>
+                        Save Dose
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
+
 </div>

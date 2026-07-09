@@ -1,100 +1,146 @@
-<div class="row mb-4 pb-3 border-bottom">
-    <div class="col-sm-6 text-sm-start mb-2 mb-sm-0">
-        <h1 class="mb-0 fs-3 fw-bold text-dark">Patient List</h1>
+<div class="card card-outline card-primary shadow-sm">
+
+    <div class="card-header">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+
+            <h3 class="card-title mb-0">
+                Patient List
+            </h3>
+
+            <a href="<?= $base_url ?>/patient/create"
+               class="btn btn-outline-primary btn-sm">
+
+                <i class="bi bi-plus-circle me-1"></i>
+                Add Patient
+
+            </a>
+
+        </div>
+
     </div>
 
-    <div class="col-sm-6">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center justify-content-sm-end mb-0 bg-transparent p-0">
-                <li class="breadcrumb-item">
-                    <a href="#" class="text-decoration-none">
-                        <i class="bi bi-house-door-fill me-1"></i>Home
-                    </a>
-                </li>
-                <li class="breadcrumb-item">Patient</li>
-                <li class="breadcrumb-item active">Patient List</li>
-            </ol>
-        </nav>
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover align-middle datatable">
+
+                <thead class="table-light">
+
+                    <tr class="text-center">
+
+                        <th width="60">#</th>
+                        <th width="70">Image</th>
+                        <th>Patient Code</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Blood Group</th>
+                        <th>Phone</th>
+                        <th width="90">Status</th>
+                        <th width="140">Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <?php foreach ($data as $key => $patient): ?>
+
+                        <tr>
+
+                            <td class="text-center">
+                                <?= $key + 1 ?>
+                            </td>
+
+                            <td class="text-center">
+
+                                <img
+                                    src="<?= $base_url ?>/uploads/patients/<?= htmlspecialchars($patient->image) ?>"
+                                    alt="<?= htmlspecialchars($patient->name) ?>"
+                                    class="img-circle border"
+                                    width="45"
+                                    height="45"
+                                    style="object-fit: cover;">
+
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars($patient->patient_code) ?>
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars($patient->name) ?>
+                            </td>
+
+                            <td class="text-center">
+                                <?= ucfirst(htmlspecialchars($patient->gender)) ?>
+                            </td>
+
+                            <td class="text-center">
+                                <?= htmlspecialchars($patient->blood_group) ?>
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars($patient->phone) ?>
+                            </td>
+
+                            <td class="text-center">
+
+                                <?php if ($patient->status == 'active'): ?>
+
+                                    <span class="badge bg-success">
+                                        Active
+                                    </span>
+
+                                <?php else: ?>
+
+                                    <span class="badge bg-danger">
+                                        Inactive
+                                    </span>
+
+                                <?php endif; ?>
+
+                            </td>
+
+                            <td class="text-center">
+
+                                <div class="btn-group btn-group-sm">
+
+                                    <a href="<?= $base_url ?>/patient/edit/<?= $patient->id ?>"
+                                       class="btn btn-outline-primary"
+                                       title="Edit">
+
+                                        <i class="bi bi-pencil-square"></i>
+
+                                    </a>
+
+                                    <!--
+                                    <a href="<?= $base_url ?>/patient/delete/<?= $patient->id ?>"
+                                       class="btn btn-outline-danger"
+                                       title="Delete"
+                                       onclick="return confirm('Are you sure to delete this record?')">
+
+                                        <i class="bi bi-trash"></i>
+
+                                    </a>
+                                    -->
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
     </div>
-</div>
-
-<div class="mb-3 text-end">
-    <a href="<?= $base_url ?>/patient/create" class="btn btn-primary">
-        Add Patient
-    </a>
-</div>
-
-<div class="table-responsive rounded border">
-
-    <table
-        data-toggle="table"
-        data-search="true"
-        data-pagination="true"
-        data-page-size="10"
-        data-search-highlight="true"
-        class="table table-bordered table-hover table-striped align-middle mb-0">
-
-        <thead class="table-dark text-center">
-            <tr>
-                <th>S/L</th>
-                <th>Image</th>
-                <th>Patient Code</th>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Blood Group</th>
-                <th>Phone</th>
-                <th>Status</th>
-                <th width="130">Action</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            <?php foreach ($data as $key => $patient): ?>
-
-                <tr>
-
-                    <td class="text-center"><?= $key + 1 ?></td>
-
-                    <td class="text-center">
-                        <img src="<?= $base_url ?>/uploads/patients/<?= $patient->image ?>" width="50"  height="50" >
-                    </td>
-
-                    <td><?= $patient->patient_code ?></td>
-
-                    <td><?= $patient->name ?></td>
-
-                    <td><?= ucfirst($patient->gender) ?></td>
-
-                    <td><?= $patient->blood_group ?></td>
-
-                    <td><?= $patient->phone ?></td>
-
-                    <td><?= ucfirst($patient->status) ?></td>
-
-                    <td class="text-center">
-
-                        <div class="btn-group btn-group-sm">
-
-                            <a href="<?= $base_url ?>/patient/edit/<?= $patient->id ?>" class="btn btn-primary">
-                                Edit
-                            </a>
-
-                            <a href="<?= $base_url ?>/patient/delete/<?= $patient->id ?>"
-                                class="btn btn-danger"
-                                onclick="return confirm('Are you sure?')">
-                                Delete
-                            </a>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-            <?php endforeach; ?>
-
-        </tbody>
-    </table>
 
 </div>
