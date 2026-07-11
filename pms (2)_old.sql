@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2026 at 04:22 AM
+-- Generation Time: Jul 09, 2026 at 04:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -82,19 +82,8 @@ CREATE TABLE `consultations` (
   `clinical_notes` text DEFAULT NULL,
   `medical_history` text DEFAULT NULL,
   `physical_examination` text DEFAULT NULL,
-  `neurological_examination` text DEFAULT NULL,
   `diagnosis` text DEFAULT NULL,
   `treatment_plan` text DEFAULT NULL,
-  `followup_date` date DEFAULT NULL,
-  `status` enum('pending','completed') NOT NULL DEFAULT 'pending',
-  `height` decimal(5,2) DEFAULT NULL,
-  `weight` decimal(5,2) DEFAULT NULL,
-  `bmi` decimal(5,2) DEFAULT NULL,
-  `blood_pressure` varchar(20) DEFAULT NULL,
-  `pulse` smallint(6) DEFAULT NULL,
-  `temperature` decimal(4,1) DEFAULT NULL,
-  `spo2` smallint(6) DEFAULT NULL,
-  `blood_sugar` decimal(5,2) DEFAULT NULL,
   `consultation_date` date NOT NULL,
   `report` text DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -106,8 +95,8 @@ CREATE TABLE `consultations` (
 -- Dumping data for table `consultations`
 --
 
-INSERT INTO `consultations` (`id`, `appointment_id`, `patient_id`, `doctor_id`, `chief_complaint`, `clinical_notes`, `medical_history`, `physical_examination`, `neurological_examination`, `diagnosis`, `treatment_plan`, `followup_date`, `status`, `height`, `weight`, `bmi`, `blood_pressure`, `pulse`, `temperature`, `spo2`, `blood_sugar`, `consultation_date`, `report`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 'Head Pain', '', '', '', '', '', '', '2005-05-17', 'pending', 6.50, 78.00, 52.00, '16.4', 33, 100.0, 87, 29.00, '2026-07-05', 'report-1783358495.pdf', NULL, '2026-07-06 17:21:35', '2026-07-10 06:12:22');
+INSERT INTO `consultations` (`id`, `appointment_id`, `patient_id`, `doctor_id`, `chief_complaint`, `clinical_notes`, `medical_history`, `physical_examination`, `diagnosis`, `treatment_plan`, `consultation_date`, `report`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, '', '', '', NULL, '', '', '2026-07-06', 'report-1783358495.pdf', NULL, '2026-07-06 17:21:35', '2026-07-06 17:21:35');
 
 -- --------------------------------------------------------
 
@@ -136,7 +125,7 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`id`, `user_id`, `name`, `email`, `phone`, `specialization`, `qualification`, `consultation_fee`, `signature_image`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Dr. Sirajee Shafiqul Islam', 'sirajee@gmail.com', '017500', 'Stroke & Endovascular Neurologist', '<p><strong>MBBS, MD (Neuromedicine), FINR </strong></p><p>Clinical Fellow, Medanta Institute of Neuroscience (India)</p><p>Visiting Fellow, Alfried Krupp Hospital (Germany)</p><p>Advanced Training, Lausanne University Hospital (Switzerland)</p><p>Stroke &amp; Endovascular Neurologist</p><p>Associate Professor</p><p>National Institute of Neurosciences &amp; Hospital, Dhaka, Bangladesh</p>', 1200.00, NULL, 'dr-sirajee-shafiqul-islam-1783350701.jpg', 'active', '2026-07-06 11:13:24', '2026-07-10 04:15:05'),
+(1, 2, 'Dr. Sirajee Shafiqul Islam', 'sirajee@gmail.com', '017500', 'Neurologist', 'PPHP', 0.00, NULL, 'dr-sirajee-shafiqul-islam-1783350701.jpg', 'active', '2026-07-06 11:13:24', '2026-07-06 15:12:07'),
 (2, 4, 'Md. Mahmud Hasan', 'mahmud@gmail.com', '01750000000', '', NULL, NULL, NULL, 'mahmud-hasan-1783349692.jpg', 'active', '2026-07-06 12:15:02', '2026-07-06 15:12:54');
 
 -- --------------------------------------------------------
@@ -807,8 +796,7 @@ CREATE TABLE `prescriptions` (
   `patient_id` int(11) NOT NULL,
   `doctor_id` int(11) NOT NULL,
   `prescription_date` date NOT NULL,
-  `cc` text DEFAULT NULL,
-  `advice` text DEFAULT NULL,
+  `additional_notes` text DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -818,13 +806,11 @@ CREATE TABLE `prescriptions` (
 -- Dumping data for table `prescriptions`
 --
 
-INSERT INTO `prescriptions` (`id`, `consultation_id`, `patient_id`, `doctor_id`, `prescription_date`, `cc`, `advice`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 0, 0, 0, '2026-07-08', NULL, NULL, NULL, '2026-07-08 13:29:57', '2026-07-08 13:29:57'),
-(2, 0, 0, 0, '2026-07-08', NULL, NULL, NULL, '2026-07-08 13:29:57', '2026-07-08 13:29:57'),
-(3, 1, 1, 1, '2026-07-08', NULL, NULL, NULL, '2026-07-08 13:40:47', '2026-07-08 13:40:47'),
-(4, 1, 1, 1, '2026-07-08', NULL, NULL, NULL, '2026-07-08 16:20:34', '2026-07-08 16:20:34'),
-(5, 0, 0, 0, '2026-07-10', NULL, NULL, NULL, '2026-07-10 02:38:01', '2026-07-10 02:38:01'),
-(6, 1, 1, 1, '2026-07-10', NULL, NULL, NULL, '2026-07-10 06:14:29', '2026-07-10 06:14:29');
+INSERT INTO `prescriptions` (`id`, `consultation_id`, `patient_id`, `doctor_id`, `prescription_date`, `additional_notes`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 0, 0, 0, '2026-07-08', NULL, NULL, '2026-07-08 13:29:57', '2026-07-08 13:29:57'),
+(2, 0, 0, 0, '2026-07-08', NULL, NULL, '2026-07-08 13:29:57', '2026-07-08 13:29:57'),
+(3, 1, 1, 1, '2026-07-08', NULL, NULL, '2026-07-08 13:40:47', '2026-07-08 13:40:47'),
+(4, 1, 1, 1, '2026-07-08', NULL, NULL, '2026-07-08 16:20:34', '2026-07-08 16:20:34');
 
 -- --------------------------------------------------------
 
@@ -855,11 +841,7 @@ INSERT INTO `prescription_medicines` (`id`, `prescription_id`, `medicine_id`, `d
 (2, 2, 1, 1, 0, 1, 1, '', 0, '2026-07-08 13:29:57', '2026-07-08 13:29:57'),
 (3, 3, 1, 1, 0, 1, 0, '', 0, '2026-07-08 13:40:47', '2026-07-08 13:40:47'),
 (4, 4, 1, 1, 0, 1, 0, '', 0, '2026-07-08 16:20:34', '2026-07-08 16:20:34'),
-(5, 4, 3, 7, 0, 4, 0, '', 0, '2026-07-08 16:20:34', '2026-07-08 16:20:34'),
-(6, 5, 2, 1, 0, 1, 0, '', 0, '2026-07-10 02:38:01', '2026-07-10 02:38:01'),
-(7, 5, 5, 1, 0, 1, 0, '', 0, '2026-07-10 02:38:01', '2026-07-10 02:38:01'),
-(8, 6, 2, 1, 0, 1, 0, '', 0, '2026-07-10 06:14:30', '2026-07-10 06:14:30'),
-(9, 6, 5, 1, 0, 1, 0, '', 0, '2026-07-10 06:14:30', '2026-07-10 06:14:30');
+(5, 4, 3, 7, 0, 4, 0, '', 0, '2026-07-08 16:20:34', '2026-07-08 16:20:34');
 
 -- --------------------------------------------------------
 
@@ -1242,13 +1224,13 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `prescriptions`
 --
 ALTER TABLE `prescriptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `prescription_medicines`
 --
 ALTER TABLE `prescription_medicines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `role`
