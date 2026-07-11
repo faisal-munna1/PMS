@@ -136,132 +136,139 @@
                     </div>
 
 
-                    <div
-                        class="col-md-12 mb-3">
+                    <div class="col-md-12 mb-3">
 
-                        <label
-                            class="form-label">
+                        <label class="form-label">
                             Qualification
                         </label>
 
+                        <!-- Quill Editor -->
+                        <div
+                            class="quill-editor border rounded"
+                            data-target="qualification"
+                            data-placeholder="Enter doctor qualification..."
+                            style="height:220px;">
+                        </div>
+
+                        <!-- Hidden Textarea -->
                         <textarea
-                            class="form-control"
+                            id="qualification"
                             name="qualification"
-                            rows="3"
-                            placeholder="Enter qualification"></textarea>
+                            class="d-none"></textarea>
 
                     </div>
+                </div>
 
 
-                    <div
-                        class="col-md-6 mb-3">
+                <div
+                    class="col-md-6 mb-3">
 
-                        <label
-                            class="form-label">
-                            Consultation Fee
-                        </label>
+                    <label
+                        class="form-label">
+                        Consultation Fee
+                    </label>
 
-                        <input
-                            type="number"
-                            class="form-control"
-                            name="consultation_fee"
-                            step="0.01"
-                            placeholder="0.00">
-
-                    </div>
-
-
-                    <div
-                        class="col-md-6 mb-3">
-
-                        <label
-                            class="form-label">
-                            Status
-                        </label>
-
-                        <select
-                            class="form-select"
-                            name="status">
-
-                            <option
-                                value="active">
-                                Active
-                            </option>
-
-                            <option
-                                value="inactive">
-                                Inactive
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div
-                        class="col-md-6 mb-3">
-
-                        <label
-                            class="form-label">
-                            Signature Image
-                        </label>
-
-                        <input
-                            type="file"
-                            class="form-control"
-                            name="signature_image">
-
-                    </div>
-
-
-                    <div
-                        class="col-md-6 mb-3">
-
-                        <label
-                            class="form-label">
-                            Doctor Image
-                        </label>
-
-                        <input
-                            type="file"
-                            class="form-control"
-                            name="image">
-
-                    </div>
-
+                    <input
+                        type="number"
+                        class="form-control"
+                        name="consultation_fee"
+                        step="0.01"
+                        placeholder="0.00">
 
                 </div>
 
+
+                <div
+                    class="col-md-6 mb-3">
+
+                    <label
+                        class="form-label">
+                        Status
+                    </label>
+
+                    <select
+                        class="form-select"
+                        name="status">
+
+                        <option
+                            value="active">
+                            Active
+                        </option>
+
+                        <option
+                            value="inactive">
+                            Inactive
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div
+                    class="col-md-6 mb-3">
+
+                    <label
+                        class="form-label">
+                        Signature Image
+                    </label>
+
+                    <input
+                        type="file"
+                        class="form-control"
+                        name="signature_image">
+
+                </div>
+
+
+                <div
+                    class="col-md-6 mb-3">
+
+                    <label
+                        class="form-label">
+                        Doctor Image
+                    </label>
+
+                    <input
+                        type="file"
+                        class="form-control"
+                        name="image">
+
+                </div>
+
+
             </div>
-
-
-            <div
-                class="card-footer">
-
-                <button
-                    type="submit"
-                    class="btn btn-primary"
-                    name="btn_submit">
-
-                    Save Doctor
-
-                </button>
-
-
-                <a
-                    href="<?= $base_url ?>/doctor/index"
-                    class="btn btn-secondary">
-
-                    Cancel
-
-                </a>
-
-            </div>
-
-
-        </form>
-
 
     </div>
+
+
+    <div
+        class="card-footer">
+
+        <button
+            type="submit"
+            class="btn btn-primary"
+            name="btn_submit">
+
+            Save Doctor
+
+        </button>
+
+
+        <a
+            href="<?= $base_url ?>/doctor/index"
+            class="btn btn-secondary">
+
+            Cancel
+
+        </a>
+
+    </div>
+
+
+    </form>
+
+
+</div>
 
 </div>

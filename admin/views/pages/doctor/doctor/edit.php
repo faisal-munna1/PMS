@@ -1,10 +1,10 @@
 <form method="post"
-      action="<?= $base_url ?>/doctor/update"
-      enctype="multipart/form-data">
+    action="<?= $base_url ?>/doctor/update"
+    enctype="multipart/form-data">
 
     <input type="hidden"
-           name="id"
-           value="<?= $data->id ?>">
+        name="id"
+        value="<?= $data->id ?>">
 
     <div class="card-body">
 
@@ -17,7 +17,7 @@
                 </label>
 
                 <select class="form-select"
-                        name="user_id">
+                    name="user_id">
 
                     <?php foreach ($users as $user): ?>
 
@@ -42,9 +42,9 @@
                 </label>
 
                 <input type="text"
-                       class="form-control"
-                       name="specialization"
-                       value="<?= $data->specialization ?>">
+                    class="form-control"
+                    name="specialization"
+                    value="<?= $data->specialization ?>">
 
             </div>
 
@@ -56,10 +56,10 @@
                 </label>
 
                 <input type="text"
-                       class="form-control"
-                       name="name"
-                       value="<?= $data->name ?>"
-                       placeholder="Enter Name">
+                    class="form-control"
+                    name="name"
+                    value="<?= $data->name ?>"
+                    placeholder="Enter Name">
 
             </div>
 
@@ -71,10 +71,10 @@
                 </label>
 
                 <input type="email"
-                       class="form-control"
-                       name="email"
-                       value="<?= $data->email ?>"
-                       placeholder="Enter email">
+                    class="form-control"
+                    name="email"
+                    value="<?= $data->email ?>"
+                    placeholder="Enter email">
 
             </div>
 
@@ -86,10 +86,10 @@
                 </label>
 
                 <input type="text"
-                       class="form-control"
-                       name="phone"
-                       value="<?= $data->phone ?>"
-                       placeholder="Enter phone">
+                    class="form-control"
+                    name="phone"
+                    value="<?= $data->phone ?>"
+                    placeholder="Enter phone">
 
             </div>
 
@@ -100,36 +100,44 @@
                     Qualification
                 </label>
 
-                <textarea class="form-control"
-                          name="qualification"
-                          rows="4"><?= $data->qualification ?></textarea>
+                <div
+                    class="quill-editor border rounded"
+                    data-target="qualification"
+                    data-placeholder="Enter doctor qualification..."
+                    style="height:220px;">
+                </div>
+
+                <textarea
+                    id="qualification"
+                    name="qualification"
+                    class="d-none"><?= htmlspecialchars($doctor->qualification ?? '') ?></textarea>
 
             </div>
 
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 my-5">
 
                 <label class="form-label">
                     Consultation Fee
                 </label>
 
                 <input type="number"
-                       class="form-control"
-                       name="consultation_fee"
-                       step="0.01"
-                       value="<?= $data->consultation_fee ?>">
+                    class="form-control"
+                    name="consultation_fee"
+                    step="0.01"
+                    value="<?= $data->consultation_fee ?>">
 
             </div>
 
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 my-5">
 
                 <label class="form-label">
                     Status
                 </label>
 
                 <select class="form-select"
-                        name="status">
+                    name="status">
 
                     <option value="active"
                         <?= $data->status == "active" ? "selected" : "" ?>>
@@ -153,14 +161,14 @@
                 </label>
 
                 <input type="file"
-                       class="form-control"
-                       name="signature_image">
+                    class="form-control"
+                    name="signature_image">
 
                 <?php if (!empty($data->signature_image)): ?>
 
                     <img src="<?= $base_url ?>/uploads/signatures/<?= $data->signature_image ?>"
-                         class="img-thumbnail mt-2"
-                         width="120">
+                        class="img-thumbnail mt-2"
+                        width="120">
 
                 <?php endif; ?>
 
@@ -174,14 +182,14 @@
                 </label>
 
                 <input type="file"
-                       class="form-control"
-                       name="image">
+                    class="form-control"
+                    name="image">
 
                 <?php if (!empty($data->image)): ?>
 
                     <img src="<?= $base_url ?>/uploads/doctors/<?= $data->image ?>"
-                         class="img-thumbnail mt-2"
-                         width="120">
+                        class="img-thumbnail mt-2"
+                        width="120">
 
                 <?php endif; ?>
 
@@ -196,13 +204,13 @@
     <div class="card-footer">
 
         <button type="submit"
-                class="btn btn-primary"
-                name="btn_submit">
+            class="btn btn-primary"
+            name="btn_submit">
             Update Doctor
         </button>
 
 
-        <a href="<?= $base_url ?>/doctor/index"class="btn btn-secondary">
+        <a href="<?= $base_url ?>/doctor/index" class="btn btn-secondary">
             Cancel
         </a>
 

@@ -14,6 +14,19 @@ class Consultation
     public $treatment_plan;
     public $consultation_date;
 
+    public $physical_examination;
+    public $neurological_examination;
+    public $followup_date;
+    public $status;
+    public $height;
+    public $weight;
+    public $bmi;
+    public $blood_pressure;
+    public $pulse;
+    public $temperature;
+    public $spo2;
+    public $blood_sugar;
+
     public function create()
     {
         global $db;
@@ -21,23 +34,38 @@ class Consultation
         $stmt = $db->prepare("
             INSERT INTO consultations (
                 appointment_id, patient_id, doctor_id, chief_complaint, 
-                clinical_notes, medical_history, report, diagnosis, 
-                treatment_plan, consultation_date
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                clinical_notes, medical_history, physical_examination, neurological_examination,
+                report, diagnosis, treatment_plan, consultation_date, 
+                followup_date, status, height, weight, 
+                bmi, blood_pressure, pulse, temperature, 
+                spo2, blood_sugar
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
 
         $stmt->bind_param(
-            "iiisssssss",
+            "iiisssssssssssddddidid",
             $this->appointment_id,
             $this->patient_id,
             $this->doctor_id,
             $this->chief_complaint,
             $this->clinical_notes,
             $this->medical_history,
+            $this->physical_examination,
+            $this->neurological_examination,
             $this->report,
             $this->diagnosis,
             $this->treatment_plan,
-            $this->consultation_date
+            $this->consultation_date,
+            $this->followup_date,
+            $this->status,
+            $this->height,
+            $this->weight,
+            $this->bmi,
+            $this->blood_pressure,
+            $this->pulse,
+            $this->temperature,
+            $this->spo2,
+            $this->blood_sugar
         );
 
         return $stmt->execute();
@@ -55,25 +83,49 @@ class Consultation
                 chief_complaint = ?,
                 clinical_notes = ?,
                 medical_history = ?,
+                physical_examination = ?,
+                neurological_examination = ?,
                 report = ?,
                 diagnosis = ?,
                 treatment_plan = ?,
-                consultation_date = ?
+                consultation_date = ?,
+                followup_date = ?,
+                status = ?,
+                height = ?,
+                weight = ?,
+                bmi = ?,
+                blood_pressure = ?,
+                pulse = ?,
+                temperature = ?,
+                spo2 = ?,
+                blood_sugar = ?
             WHERE id = ?
         ");
 
         $stmt->bind_param(
-            "iiisssssssi",
+            "iiisssssssssssddddididi",
             $this->appointment_id,
             $this->patient_id,
             $this->doctor_id,
             $this->chief_complaint,
             $this->clinical_notes,
             $this->medical_history,
+            $this->physical_examination,
+            $this->neurological_examination,
             $this->report,
             $this->diagnosis,
             $this->treatment_plan,
             $this->consultation_date,
+            $this->followup_date,
+            $this->status,
+            $this->height,
+            $this->weight,
+            $this->bmi,
+            $this->blood_pressure,
+            $this->pulse,
+            $this->temperature,
+            $this->spo2,
+            $this->blood_sugar,
             $this->id
         );
 

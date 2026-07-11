@@ -16,19 +16,25 @@ public static function html_select($name="cmbMedicines")
         global $db;
 
         $stmt = $db->query("
-            SELECT medicines.id , medicines.medicine_name,medicine_generics.generic_name generic 
-            FROM medicines join  medicine_generics on  medicine_generics.id= medicines.generic_id
-            ORDER BY id
+            SELECT medicines.id , medicines.medicine_name,medicine_generics.generic_name generic, 
+            medicine_types.type_name type,medicine_strengths.strength_name strength
+            FROM medicines 
+            join medicine_generics on  
+            medicine_generics.id= medicines.generic_id
+            join medicine_types on
+            medicine_types.id = medicines.type_id
+            join medicine_strengths on
+            medicine_strengths.id = medicines.strength_id
+            ORDER BY id;
         ");
 
        $html="<select name='$name' id='$name' class='form-select'>";
             while(  $row = $stmt->fetch_object()){
-                $html.=" <option value='$row->id'>$row->medicine_name | $row->generic </option>";
+                $html.=" <option value='$row->id'>$row->medicine_name($row->generic) $row->strength $row->type</option>";
             }
 
         return $html.= "</select>";
     }
-
 
     public function create()
     {
