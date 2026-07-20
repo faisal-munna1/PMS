@@ -57,7 +57,7 @@ echo Menu::item([
 echo Menu::item([
     "name"  => "Prescription",
     "icon"  => "bi bi-file-earmark-medical",
-    "route" => "prescription/prescription",
+    "route" => "prescription/index",
 ]);
 
 echo Menu::item([
